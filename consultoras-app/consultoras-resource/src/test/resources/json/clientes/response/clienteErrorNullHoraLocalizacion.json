@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.horaLocalizacion",
+    "errorDescription":"La Hora de Localizacion del cliente aparece vacia o nula"
+}

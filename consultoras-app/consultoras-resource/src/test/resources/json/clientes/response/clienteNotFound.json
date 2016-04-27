@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.NotFound",
+    "errorDescription":"El cliente solicitado no existe"
+}

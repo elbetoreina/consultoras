@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.existent",
+    "errorDescription":"Ya existe un cliente con ese Primer Nombre, Primer Apellido y Numero de Celular."
+}

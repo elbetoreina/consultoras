@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.primerNombre",
+    "errorDescription":"El Primer Nombre del cliente aparece vacio o nulo"
+}

@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.apellidoCasada",
+    "errorDescription":"El Apellido de Casada del Cliente es demasiado corto"
+}
