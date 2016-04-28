@@ -234,6 +234,18 @@ public class ClienteResourceUTest {
 		assertJsonResponseWithFile(response, "clienteErrorLongApellidoCasada.json");
 	}
 	
+	@Test
+	public void addClienteWithLongHoraLocalizacion() {
+
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion", "El valor de la hora de localizacion es demasiado largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongHoraLocalizacion.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongHoraLocalizacion.json");
+	}
+	
+	
 	
 	@Test
 	public void addClienteWithShortPrimerNombre() {
@@ -299,6 +311,26 @@ public class ClienteResourceUTest {
 				"clienteWithShortHoraLocalizacion.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorShortHoraLocalizacion.json");
+	}
+	
+	@Test
+	public void addClienteWithShortDireccion() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado corta"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortDireccion.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortDireccion.json");
+	}
+	
+	@Test
+	public void addClienteWithLongDireccion() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado larga"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongDireccion.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongDireccion.json");
 	}
 	
 	@Test

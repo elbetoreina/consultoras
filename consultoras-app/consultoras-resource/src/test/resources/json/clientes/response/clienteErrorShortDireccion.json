@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.direccion",
+    "errorDescription":"La Direccion del cliente es demasiado corta"
+}
