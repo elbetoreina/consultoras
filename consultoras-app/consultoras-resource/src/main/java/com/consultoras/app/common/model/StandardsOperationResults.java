@@ -22,10 +22,17 @@ public final class StandardsOperationResults {
 		return OperationResult.error(resourceMessage.getKeyOfResourceNotFound(),
 				resourceMessage.getMessageOfResourceNotFound());
 	}
-	
+
 	public static OperationResult getOperationResultIllegalArgument(final ResourceMessage resourceMessage,
 			final IllegalArgumentException ex) {
-		return OperationResult.error("Argumentos No Validos para Enumeracion", ex.getMessage());
+
+		if (ex.getMessage().contains("enum")) {
+			return OperationResult.error("Argumentos No Validos para Enumeracion", ex.getMessage());
+		} else if (ex.getMessage().contains("input string")) {
+			return OperationResult.error("Argumentos No Validos de Fecha", ex.getMessage());
+		} else {
+			return OperationResult.error("Error Generico de Insercion", ex.getMessage());
+		}
 	}
 
 }

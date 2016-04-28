@@ -224,14 +224,14 @@ public class ClienteResourceUTest {
 	}
 	
 	@Test
-	public void addClienteWithShortApellidoCasada() {
+	public void addClienteWithLongApellidoCasada() {
 
-		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado corto"));
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado largo"));
 
 		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
-				"clienteWithShortApellidoCasada.json")));
+				"clienteWithLongApellidoCasada.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
-		assertJsonResponseWithFile(response, "clienteErrorShortApellidoCasada.json");
+		assertJsonResponseWithFile(response, "clienteErrorLongApellidoCasada.json");
 	}
 	
 	
@@ -288,6 +288,35 @@ public class ClienteResourceUTest {
 				"clienteWithShortApellidoCasada.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorShortApellidoCasada.json");
+	}
+	
+	@Test
+	public void addClienteWithShortHoraLocalizacion() {
+
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion", "El valor de la hora de localizacion es demasiado corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortHoraLocalizacion.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortHoraLocalizacion.json");
+	}
+	
+	@Test
+	public void addClienteWithInvalidFechaNacimiento() {		
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithInvalidFechaNacimiento.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
+	}
+	
+	@Test
+	public void addClienteWithInvalidFechaAniversario() {		
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithInvalidFechaAniversario.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
 	}
 	
 	
