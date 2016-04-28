@@ -213,14 +213,14 @@ public class ClienteResourceUTest {
 	}
 	
 	@Test
-	public void addClienteWithShortSegundoApellido() {
+	public void addClienteWithLongSegundoApellido() {
 
-		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado corto"));
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado largo"));
 
 		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
-				"clienteWithShortSegundoApellido.json")));
+				"clienteWithLongSegundoApellido.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
-		assertJsonResponseWithFile(response, "clienteErrorShortSegundoApellido.json");
+		assertJsonResponseWithFile(response, "clienteErrorLongSegundoApellido.json");
 	}
 	
 	@Test

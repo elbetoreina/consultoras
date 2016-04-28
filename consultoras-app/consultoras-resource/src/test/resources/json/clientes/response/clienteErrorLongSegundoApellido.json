@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.segundoApellido",
+    "errorDescription":"El Segundo Apellido del Cliente es demasiado largo"
+}
