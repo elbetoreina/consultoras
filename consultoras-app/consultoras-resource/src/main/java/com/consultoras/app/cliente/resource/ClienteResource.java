@@ -55,16 +55,12 @@ public class ClienteResource {
 				logger.error("Ya existe un cliente con los valores asignados: {}", e);
 				httpCode = HttpCode.VALIDATION_ERROR;
 				result = getOperationResultExistent(RESOURCE_MESSAGE, "primerNombre, primerApellido, celular");
-			} catch (final IllegalArgumentException e) {
-				logger.error("Existen valores invalidos: {}", e);
-				httpCode = HttpCode.VALIDATION_ERROR;
-				result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-			}
-		} catch (final IllegalArgumentException e) {
+			} 
+		} catch (final Exception e) {
 			logger.error("Existen valores invalidos: {}", e);
 			httpCode = HttpCode.VALIDATION_ERROR;
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-		}
+		} 
 
 		logger.debug("Returning the operation result after adding category: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
@@ -81,11 +77,10 @@ public class ClienteResource {
 		OperationResult result;
 
 		try {
-			
 			cliente = clienteJsonConverter.convertFrom(body);
-			
+
 			try {
-				cliente = clienteServices.add(cliente);
+				cliente = clienteServices.add(cliente);				
 				result = OperationResult.success(JsonUtils.getJsonElementWithId(cliente.getId()));
 			} catch (final FieldNotValidException e) {
 				logger.error("Uno de los valores del cliente creado no es valido", e);
@@ -95,16 +90,12 @@ public class ClienteResource {
 				logger.error("Ya existe un cliente con los valores asignados: {}", e);
 				httpCode = HttpCode.VALIDATION_ERROR;
 				result = getOperationResultExistent(RESOURCE_MESSAGE, "primerNombre, primerApellido, celular");
-			} catch (final IllegalArgumentException e) {
-				logger.error("Existen valores invalidos: {}", e);
-				httpCode = HttpCode.VALIDATION_ERROR;
-				result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-			}
-		} catch (final IllegalArgumentException e) {
+			} 
+		} catch (final Exception e) {
 			logger.error("Existen valores invalidos: {}", e);
 			httpCode = HttpCode.VALIDATION_ERROR;
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-		}
+		} 
 
 		logger.debug("Returning the operation result after adding category: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();

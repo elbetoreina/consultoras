@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.telefonoOficina",
+    "errorDescription":"El numero de telefono de oficina es muy largo"
+}

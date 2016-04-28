@@ -24,14 +24,14 @@ public final class StandardsOperationResults {
 	}
 
 	public static OperationResult getOperationResultIllegalArgument(final ResourceMessage resourceMessage,
-			final IllegalArgumentException ex) {
+			final Exception ex) {
 
 		if (ex.getMessage().contains("enum")) {
 			return OperationResult.error("Argumentos No Validos para Enumeracion", ex.getMessage());
-		} else if (ex.getMessage().contains("input string")) {
-			return OperationResult.error("Argumentos No Validos de Fecha", ex.getMessage());
+		} else if (ex.toString().contains("NumberFormatException")) {
+			return OperationResult.error("Argumentos Numericos No Validos", ex.toString());
 		} else {
-			return OperationResult.error("Error Generico de Insercion", ex.getMessage());
+			return OperationResult.error("Error Generico de Insercion", ex.toString());
 		}
 	}
 

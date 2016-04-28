@@ -72,24 +72,24 @@ public class Cliente  implements Serializable{
 	@Column(name="tbl_cliente_direccion")
 	private String direccion;
 	
-	@Size(min = 2, max = 200)
+	@Size(max = 200)
 	@Email
 	@Column(name="tbl_cliente_email")	
 	private String email;
 	
-	@Size(min = 2, max = 100)
+	@Size(min = 8, max = 25)
 	@Column(name="tbl_cliente_celular")
 	private String celular;
 	
-	@Size(min = 2, max = 100)
+	@Size(min = 8, max = 25)
 	@Column(name="tbl_cliente_telefono_casa")
 	private String telefonoCasa;
 	
-	@Size(min = 2, max = 100)
+	@Size(min = 8, max = 25)
 	@Column(name="tbl_cliente_telefono_oficina")
 	private String telefonoOficina;
 	
-	@Size(min = 2, max = 100)
+	@Size(min = 8, max = 25)
 	@Column(name="tbl_cliente_telefono_conyuge")
 	private String telefonoConyuge;
 	

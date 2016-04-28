@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.email",
+    "errorDescription":"La direccion de correo del cliente es muy larga"
+}

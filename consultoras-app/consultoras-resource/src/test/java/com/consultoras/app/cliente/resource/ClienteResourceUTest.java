@@ -334,6 +334,153 @@ public class ClienteResourceUTest {
 	}
 	
 	@Test
+	public void addClienteWithInvalidEmail() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("email", "La direccion de correo del cliente es invalida"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithInvalidEmail.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorInvalidEmail.json");
+	}
+	
+	@Test
+	public void addClienteWithLongEmail() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("email", "La direccion de correo del cliente es muy larga"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongEmail.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongEmail.json");
+	}
+	
+	@Test
+	public void addClienteWithShortCelular() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortCelular.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortCelular.json");
+	}
+	
+	@Test
+	public void addClienteWithLongCelular() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongCelular.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongCelular.json");
+	}
+	
+	@Test
+	public void addClienteWithShortTelefonoCasa() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortTelefonoCasa.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoCasa.json");
+	}
+	
+	@Test
+	public void addClienteWithLongTelefonoCasa() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongTelefonoCasa.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoCasa.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithShortTelefonoOficina() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortTelefonoOficina.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficina.json");
+	}
+	
+	@Test
+	public void addClienteWithLongTelefonoOficina() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongTelefonoOficina.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficina.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithShortTelefonoConyuge() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortTelefonoConyuge.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoConyuge.json");
+	}
+	
+	@Test
+	public void addClienteWithLongTelefonoConyuge() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongTelefonoConyuge.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoConyuge.json");
+	}
+	
+	@Test
+	public void addClienteWithLongFotografia() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy larga"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongFotografia.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongFotografia.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithShortFotografia() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy corta"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortFotografia.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortFotografia.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithLongReferidoPor() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy largo"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithLongReferidoPor.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongReferidoPor.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithShortReferidoPor() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy corto"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithShortReferidoPor.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortReferidoPor.json");
+	}
+
+	
+	
+	@Test
 	public void addClienteWithInvalidFechaNacimiento() {		
 
 		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
@@ -342,11 +489,23 @@ public class ClienteResourceUTest {
 		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
 	}
 	
+	
+	
 	@Test
 	public void addClienteWithInvalidFechaAniversario() {		
 
 		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
 				"clienteWithInvalidFechaAniversario.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
+	}
+	
+	
+	@Test
+	public void addClienteWithInvalidFechaClientePreferido() {		
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithInvalidFechaClientePreferido.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
 	}

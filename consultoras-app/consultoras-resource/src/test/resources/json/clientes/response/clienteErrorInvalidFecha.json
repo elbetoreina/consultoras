@@ -1,4 +1,4 @@
 {
-    "errorIdentification":"Argumentos No Validos de Fecha",
-    "errorDescription":"For input string: \"XXX\""
+    "errorIdentification":"Argumentos Numericos No Validos",
+    "errorDescription":"java.lang.NumberFormatException: For input string: \"XXX\""
 }

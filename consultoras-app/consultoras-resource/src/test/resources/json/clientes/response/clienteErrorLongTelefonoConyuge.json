@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.telefonoConyuge",
+    "errorDescription":"El numero de telefono de conyuge es muy largo"
+}
