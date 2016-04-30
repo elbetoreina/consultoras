@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.fechaAniversario",
+    "errorDescription":"La fecha de aniversario no puede estar en el futuro"
+}

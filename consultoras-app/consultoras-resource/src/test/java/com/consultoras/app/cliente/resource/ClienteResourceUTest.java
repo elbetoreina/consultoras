@@ -510,6 +510,28 @@ public class ClienteResourceUTest {
 		assertJsonResponseWithFile(response, "clienteErrorInvalidFecha.json");
 	}
 	
+	@Test
+	public void addClienteWithFutureFechaNacimiento() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("fechaNacimiento", "La fecha de nacimiento no puede estar en el futuro"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithFutureFechaNacimiento.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorFutureFechaNacimiento.json");
+	}
+	
+	@Test
+	public void addClienteWithFutureFechaAniversario() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("fechaAniversario", "La fecha de aniversario no puede estar en el futuro"));
+
+		final Response response = clienteResource.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE,
+				"clienteWithFutureFechaAniversario.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorFutureFechaAniversario.json");
+	}
+	
+	
+	
 	
 	
 	private void assertJsonResponseWithFile(final Response response, final String fileName) {

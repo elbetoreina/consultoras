@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.fechaNacimiento",
+    "errorDescription":"La fecha de nacimiento no puede estar en el futuro"
+}
