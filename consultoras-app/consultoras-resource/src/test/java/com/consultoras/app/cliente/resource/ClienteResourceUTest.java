@@ -530,6 +530,15 @@ public class ClienteResourceUTest {
 		assertJsonResponseWithFile(response, "clienteErrorFutureFechaAniversario.json");
 	}
 	
+	@Test
+	public void updateValidCategory() {
+		final Response response = clienteResource.update(1L,readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
+		assertThat(response.getEntity().toString(), is(equalTo("")));
+
+		verify(categoryServices).update(categoryWithId(java(), 1L));
+	}
+	
 	
 	
 	

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.consultoras.app.cliente.exception.ClienteExistentException;
+import com.consultoras.app.cliente.exception.ClienteNotFoundException;
 import com.consultoras.app.cliente.model.Cliente;
 import com.consultoras.app.cliente.services.ClienteServices;
 import com.consultoras.app.common.exception.FieldNotValidException;
@@ -55,12 +56,12 @@ public class ClienteResource {
 				logger.error("Ya existe un cliente con los valores asignados: {}", e);
 				httpCode = HttpCode.VALIDATION_ERROR;
 				result = getOperationResultExistent(RESOURCE_MESSAGE, "primerNombre, primerApellido, celular");
-			} 
+			}
 		} catch (final Exception e) {
 			logger.error("Existen valores invalidos: {}", e);
 			httpCode = HttpCode.VALIDATION_ERROR;
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-		} 
+		}
 
 		logger.debug("Returning the operation result after adding category: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
@@ -80,7 +81,7 @@ public class ClienteResource {
 			cliente = clienteJsonConverter.convertFrom(body);
 
 			try {
-				cliente = clienteServices.add(cliente);				
+				cliente = clienteServices.add(cliente);
 				result = OperationResult.success(JsonUtils.getJsonElementWithId(cliente.getId()));
 			} catch (final FieldNotValidException e) {
 				logger.error("Uno de los valores del cliente creado no es valido", e);
@@ -90,16 +91,51 @@ public class ClienteResource {
 				logger.error("Ya existe un cliente con los valores asignados: {}", e);
 				httpCode = HttpCode.VALIDATION_ERROR;
 				result = getOperationResultExistent(RESOURCE_MESSAGE, "primerNombre, primerApellido, celular");
-			} 
+			}
 		} catch (final Exception e) {
 			logger.error("Existen valores invalidos: {}", e);
 			httpCode = HttpCode.VALIDATION_ERROR;
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
-		} 
+		}
 
 		logger.debug("Returning the operation result after adding category: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 
+	}
+
+	public Response update(final Long id, final String body) {
+		logger.debug("Actualizando el cliente {} con los valores {}", id, body);
+
+		try {
+			final Cliente cliente = clienteJsonConverter.convertFrom(body);
+			cliente.setId(id);
+
+			HttpCode httpCode = HttpCode.OK;
+			OperationResult result;
+			try {
+				clienteServices.update(cliente);
+				result = OperationResult.success();
+			} catch (final FieldNotValidException e) {
+				logger.error("Uno de los valores del cliente creado no es valido", e);
+				httpCode = HttpCode.VALIDATION_ERROR;
+				result = getOperationResultInvalidField(RESOURCE_MESSAGE, e);
+			} catch (final ClienteExistentException e) {
+				logger.error("Ya existe un cliente con los valores asignados: {}", e);
+				httpCode = HttpCode.VALIDATION_ERROR;
+				result = getOperationResultExistent(RESOURCE_MESSAGE, "name");
+			} catch (final ClienteNotFoundException e) {
+				logger.error("No category found for the given id", e);
+				httpCode = HttpCode.NOT_FOUND;
+				result = getOperationResultNotFound(RESOURCE_MESSAGE);
+			}
+		} catch (final Exception e) {
+			logger.error("Existen valores invalidos: {}", e);
+			httpCode = HttpCode.VALIDATION_ERROR;
+			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
+		}
+
+		logger.debug("Returning the operation result after updating category: {}", result);
+		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 	}
 
 }
