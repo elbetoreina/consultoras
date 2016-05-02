@@ -1,7 +1,6 @@
 package com.consultoras.app.common.utils;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class CalendarUtils {
@@ -10,15 +9,11 @@ public class CalendarUtils {
 
 		if (epoch != null) {
 			Long fechaEpoch = Long.valueOf(epoch);
-			Date fechaRaw = new Date(fechaEpoch);
+			
 			Calendar fechaCalendar = Calendar.getInstance();
 
-			fechaCalendar.setTime(fechaRaw);
-
-			fechaCalendar.set(Calendar.HOUR, 12);
-			fechaCalendar.set(Calendar.MINUTE, 0);
-			fechaCalendar.set(Calendar.SECOND, 0);
-			fechaCalendar.set(Calendar.MILLISECOND, 0);
+			fechaCalendar.setTimeInMillis(fechaEpoch * 1000);
+			
 
 			return fechaCalendar;
 		} else {
@@ -31,8 +26,9 @@ public class CalendarUtils {
 
 		if (calendar != null) {
 
-			Date fechaRaw = calendar.getTime();
-			String fechaEpoch = Objects.toString(fechaRaw, null);
+			Long fechaLong = calendar.getTimeInMillis()/1000;
+			
+			String fechaEpoch = Objects.toString(fechaLong, null);
 
 			return fechaEpoch;
 		} else {

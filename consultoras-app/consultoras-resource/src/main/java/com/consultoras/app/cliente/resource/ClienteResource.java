@@ -63,7 +63,7 @@ public class ClienteResource {
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
 		}
 
-		logger.debug("Returning the operation result after adding category: {}", result);
+		logger.debug("Retornando el resultado de la operacion despues de agregar al cliente: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 
 	}
@@ -98,20 +98,21 @@ public class ClienteResource {
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
 		}
 
-		logger.debug("Returning the operation result after adding category: {}", result);
+		logger.debug("Retornando el resultado de la operacion despues de agregar al cliente: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 
 	}
 
 	public Response update(final Long id, final String body) {
 		logger.debug("Actualizando el cliente {} con los valores {}", id, body);
+		
+		HttpCode httpCode = HttpCode.OK;
+		OperationResult result;
 
 		try {
 			final Cliente cliente = clienteJsonConverter.convertFrom(body);
 			cliente.setId(id);
-
-			HttpCode httpCode = HttpCode.OK;
-			OperationResult result;
+			
 			try {
 				clienteServices.update(cliente);
 				result = OperationResult.success();
@@ -122,9 +123,9 @@ public class ClienteResource {
 			} catch (final ClienteExistentException e) {
 				logger.error("Ya existe un cliente con los valores asignados: {}", e);
 				httpCode = HttpCode.VALIDATION_ERROR;
-				result = getOperationResultExistent(RESOURCE_MESSAGE, "name");
+				result = getOperationResultExistent(RESOURCE_MESSAGE, "primerNombre, primerApellido, celular");
 			} catch (final ClienteNotFoundException e) {
-				logger.error("No category found for the given id", e);
+				logger.error("No existe un cliente con el id especificado", e);
 				httpCode = HttpCode.NOT_FOUND;
 				result = getOperationResultNotFound(RESOURCE_MESSAGE);
 			}
@@ -134,7 +135,7 @@ public class ClienteResource {
 			result = getOperationResultIllegalArgument(RESOURCE_MESSAGE, e);
 		}
 
-		logger.debug("Returning the operation result after updating category: {}", result);
+		logger.debug("Retornando el resultado de la operacion despues de actualizar al cliente: {}", result);
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 	}
 

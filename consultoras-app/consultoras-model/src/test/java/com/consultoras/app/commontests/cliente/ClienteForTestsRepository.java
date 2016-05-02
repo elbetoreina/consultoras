@@ -26,15 +26,15 @@ public class ClienteForTestsRepository {
 		Calendar fechaAniversario = Calendar.getInstance();
 		Calendar fechaPreferida = Calendar.getInstance();
 		
-		fechaNacimiento.set(1986, 10, 10);
-		fechaAniversario.set(2010, 6, 24);
-		fechaPreferida.set(2016, 4, 25);
+		fechaNacimiento.setTimeInMillis(531252000L*1000);
+		fechaAniversario.setTimeInMillis(1278007200L*1000);
+		fechaPreferida.setTimeInMillis(1391277600L*1000);
 		
 		return new Cliente("Lucia","Isabel","Navarijo","Bachez","Reina", 
 				fechaNacimiento, fechaAniversario, "15:00", 
-				"24 Avenida 26-71 Zona 16, Portal De San Isidro Residencias, Guatemala", 
-				"lisabelnavarijo@gmail.com", "4769-2171", "2219-5470", "2222-2222", "5575-2615", 
-				"\\pictures\\Picture01", RangoEdad.Treintas, TonoBase.Beige, TipoLabios.Fino, FormaCara.Ovalada, 
+				"24 Avenida 26-71 Zona 16, Portal de San Isidro Residencias, Guatemala", 
+				"lisabelnavarijo@gmail.com", "4769-2191", "2219-5470", "2229-2500", "5575-2615", 
+				"/images/foto001.jpg", RangoEdad.Treintas, TonoBase.Beige, TipoLabios.Fino, FormaCara.Ovalada, 
 				TipoPiel.Mixta, TonoPiel.Blanca, ColorCabello.Castano, ColorOjos.Cafe, fechaPreferida,
 				"Alberto Reina");
 	}

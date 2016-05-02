@@ -476,9 +476,7 @@ public class ClienteResourceUTest {
 				"clienteWithShortReferidoPor.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorShortReferidoPor.json");
-	}
-
-	
+	}	
 	
 	@Test
 	public void addClienteWithInvalidFechaNacimiento() {		
@@ -531,12 +529,44 @@ public class ClienteResourceUTest {
 	}
 	
 	@Test
-	public void updateValidCategory() {
-		final Response response = clienteResource.update(1L,readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
+	public void updateValidClient() {
+		
+		Cliente cliente = lucia();		
+		
+		final Response response = clienteResource.update(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 		assertThat(response.getEntity().toString(), is(equalTo("")));
 
-		verify(categoryServices).update(categoryWithId(java(), 1L));
+		verify(clienteServices).update(clienteWithId(cliente, 1L));
+		
+	}
+	
+	@Test
+	public void updateClientWithDataBelongingToOtherClient() {
+		
+		Cliente cliente = lucia();
+		
+		doThrow(new ClienteExistentException()).when(clienteServices).update(clienteWithId(cliente, 1L));
+
+		final Response response = clienteResource.update(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteAlreadyExists.json");
+	}
+	
+	@Test
+	public void updateClienteWithNullPrimerNombre() {
+		
+		Cliente cliente = lucia();
+		
+		doThrow(new FieldNotValidException("primerNombre", "El Primer Nombre del cliente aparece vacio o nulo")).when(clienteServices).update(
+				clienteWithId(cliente, 1L));
+
+		final Response response = clienteResource.update(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorNullPrimerNombre.json");
 	}
 	
 	
