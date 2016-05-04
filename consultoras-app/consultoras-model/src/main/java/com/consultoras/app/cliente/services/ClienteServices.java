@@ -23,4 +23,6 @@ public interface ClienteServices {
 	Cliente findById(Long id) throws ClienteNotFoundException;
 	
 	List<Cliente> findAll();
+
+	void testUpdateCliente() throws FieldNotValidException, ClienteNotFoundException;
 }

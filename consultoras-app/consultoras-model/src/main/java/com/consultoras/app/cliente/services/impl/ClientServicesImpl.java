@@ -29,6 +29,18 @@ public class ClientServicesImpl implements ClienteServices {
 			return clienteRepository.add(cliente);
 		
 	}
+	
+	@Override
+	public Cliente testAddCliente() {
+		Cliente cliente = new Cliente();
+		
+		cliente = lucia();
+		
+		cliente = clienteWithId(cliente, 1L);
+
+		return cliente;
+	}
+	
 
 	@Override
 	public void update(Cliente cliente) {
@@ -38,6 +50,17 @@ public class ClientServicesImpl implements ClienteServices {
 			throw new ClienteNotFoundException();
 		}
 
+		clienteRepository.update(cliente);
+	}
+	
+	@Override
+	public void testUpdateCliente() {
+		Cliente cliente = new Cliente();
+		
+		cliente = lucia();
+		
+		cliente.setCelular("4769-2191");
+		
 		clienteRepository.update(cliente);
 	}
 
@@ -87,15 +110,6 @@ public class ClientServicesImpl implements ClienteServices {
 		}
 	}
 
-	@Override
-	public Cliente testAddCliente() {
-		Cliente cliente = new Cliente();
-		
-		cliente = lucia();
-		
-		cliente = clienteWithId(cliente, 1L);
-
-		return cliente;
-	}
+	
 
 }
