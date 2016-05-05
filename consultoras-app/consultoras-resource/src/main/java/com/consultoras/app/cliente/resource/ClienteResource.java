@@ -108,6 +108,28 @@ public class ClienteResource {
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 
 	}
+	
+	public Response delete(final Long id){
+		logger.debug("Borrando el cliente id {}", id);
+		
+		HttpCode httpCode = HttpCode.OK;
+		OperationResult result;
+		
+		
+		try{
+			Cliente cliente = clienteServices.findById(id);
+			clienteServices.delete(cliente);
+			result = OperationResult.success(JsonUtils.getJsonElementWithId(cliente.getId()));
+		}
+		catch (final ClienteNotFoundException e) {
+			logger.error("cliente no encontrado", e);
+			httpCode = HttpCode.NOT_FOUND;
+			result = getOperationResultNotFound(RESOURCE_MESSAGE);
+		}
+		
+		logger.debug("Retornado el resultado de la operacion despues de eliminar el cliente: {}", result);
+		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
+	}
 
 	public Response update(final Long id, final String body) {
 		logger.debug("Actualizando el cliente {} con los valores {}", id, body);

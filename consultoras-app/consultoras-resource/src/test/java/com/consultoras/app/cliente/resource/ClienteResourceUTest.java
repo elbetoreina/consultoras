@@ -1143,7 +1143,7 @@ public class ClienteResourceUTest {
 	}
 	
 	@Test
-	public void findAllTwoCategories() {
+	public void findAllTwoClientes() {
 		
 		Cliente clienteLucia = lucia();
 		Cliente clienteMaria = enieytilde();
@@ -1155,6 +1155,27 @@ public class ClienteResourceUTest {
 		final Response response = clienteResource.findAll();
 		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 		assertJsonResponseWithFile(response, "twoClientes.json");
+	}
+	
+	@Test
+	public void deleteCliente(){
+		
+		Cliente cliente = lucia();
+		
+		when(clienteServices.findById(1L)).thenReturn(clienteWithId(cliente, 1L));
+
+		final Response response = clienteResource.delete(1L);
+		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));		
+	}
+	
+	
+	@Test
+	public void deleteClienteNotFound(){
+
+		doThrow(new ClienteNotFoundException()).when(clienteServices).findById(1L);
+
+		final Response response = clienteResource.delete(1L);
+		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));		
 	}
 	
 	
