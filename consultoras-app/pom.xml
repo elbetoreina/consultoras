@@ -100,6 +100,17 @@
 				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
+			<dependency>
+				<groupId>com.consultoras</groupId>
+				<artifactId>consultoras-resource</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.consultoras</groupId>
+				<artifactId>consultoras-resource</artifactId>
+				<version>${project.version}</version>
+				<type>test-jar</type>
+			</dependency>
 			
 		</dependencies>
 	</dependencyManagement>
