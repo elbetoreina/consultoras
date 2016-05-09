@@ -2,15 +2,19 @@ package com.consultoras.app.cliente.repository;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.consultoras.app.cliente.model.Cliente;
 
 
+@Stateless
 public class ClienteRepository {
 	
 	
+	@PersistenceContext
 	EntityManager em;
 	
 	public Cliente add(Cliente cliente){

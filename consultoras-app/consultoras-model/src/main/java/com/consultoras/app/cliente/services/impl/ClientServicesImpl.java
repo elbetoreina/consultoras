@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
@@ -16,9 +18,13 @@ import com.consultoras.app.common.exception.FieldNotValidException;
 
 import static com.consultoras.app.commontests.cliente.ClienteForTestsRepository.*;
 
+@Stateless
 public class ClientServicesImpl implements ClienteServices {
 
+	@Inject
 	Validator validator;
+	
+	@Inject
 	ClienteRepository clienteRepository;
 
 	@Override

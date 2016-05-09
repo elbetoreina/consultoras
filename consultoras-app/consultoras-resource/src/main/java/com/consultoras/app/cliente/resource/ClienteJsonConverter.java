@@ -1,6 +1,9 @@
 package com.consultoras.app.cliente.resource;
 
 import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
+
 import static com.consultoras.app.common.utils.CalendarUtils.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,6 +19,7 @@ import com.consultoras.app.cliente.model.TonoBase;
 import com.consultoras.app.cliente.model.TonoPiel;
 import com.consultoras.app.common.json.JsonReader;
 
+@ApplicationScoped
 public class ClienteJsonConverter {
 	
 	public Cliente convertFrom(final String json) throws IllegalArgumentException {

@@ -4,6 +4,16 @@ import static com.consultoras.app.common.model.StandardsOperationResults.*;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
@@ -24,14 +34,20 @@ import com.consultoras.app.common.model.ResourceMessage;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+
+@Path("/clientes")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class ClienteResource {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static final ResourceMessage RESOURCE_MESSAGE = new ResourceMessage("cliente");
 
+	@Inject
 	ClienteServices clienteServices;
 
+	@Inject
 	ClienteJsonConverter clienteJsonConverter;
 
 	// This needs to have the same body as add Method *EXCEPTING MARKED*
@@ -74,6 +90,7 @@ public class ClienteResource {
 
 	}
 
+	@POST
 	public Response add(final String body) {
 
 		logger.debug("Agregando un nuevo cliente: {}", body);
@@ -109,7 +126,10 @@ public class ClienteResource {
 
 	}
 	
-	public Response delete(final Long id){
+	
+	@DELETE
+	@Path("/{id}")
+	public Response delete(@PathParam("id") final Long id){
 		logger.debug("Borrando el cliente id {}", id);
 		
 		HttpCode httpCode = HttpCode.OK;
@@ -131,7 +151,9 @@ public class ClienteResource {
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 	}
 
-	public Response update(final Long id, final String body) {
+	@PUT
+	@Path("/{id}")	
+	public Response update(@PathParam("id") final Long id, final String body) {
 		logger.debug("Actualizando el cliente {} con los valores {}", id, body);
 
 		HttpCode httpCode = HttpCode.OK;
@@ -210,7 +232,9 @@ public class ClienteResource {
 		return Response.status(httpCode.getCode()).entity(OperationResultJsonWriter.toJson(result)).build();
 	}
 
-	public Response findById(final Long id) {
+	@GET
+	@Path("/{id}")	
+	public Response findById(@PathParam("id") final Long id) {
 		logger.debug("Buscando cliente: {}", id);
 		ResponseBuilder responseBuilder;
 		try {
@@ -226,6 +250,7 @@ public class ClienteResource {
 		return responseBuilder.build();
 	}
 
+	@GET
 	public Response findAll() {
 		logger.debug("Buscando todos los clientes");
 
@@ -239,14 +264,14 @@ public class ClienteResource {
 				.build();
 	}
 
-	private JsonElement getJsonElementWithPagingAndEntries(final List<Cliente> categories) {
+	private JsonElement getJsonElementWithPagingAndEntries(final List<Cliente> clientes) {
 		final JsonObject jsonWithEntriesAndPaging = new JsonObject();
 
 		final JsonObject jsonPaging = new JsonObject();
-		jsonPaging.addProperty("totalRecords", categories.size());
+		jsonPaging.addProperty("totalRecords", clientes.size());
 
 		jsonWithEntriesAndPaging.add("paging", jsonPaging);
-		jsonWithEntriesAndPaging.add("entries", clienteJsonConverter.convertToJsonElement(categories));
+		jsonWithEntriesAndPaging.add("entries", clienteJsonConverter.convertToJsonElement(clientes));
 
 		return jsonWithEntriesAndPaging;
 	}

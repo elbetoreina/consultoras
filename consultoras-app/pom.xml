@@ -161,7 +161,7 @@
 	</dependencies>  
 	<modules>
 		<module>consultoras-model</module>
-		<module>consultoras-resource</module>
-		<module>consultoras-int-test</module>
+		<module>consultoras-resource</module>		
+		<module>consultoras-int-tests</module>
 	</modules>
 </project>

@@ -2,14 +2,14 @@ package com.consultoras.app.cliente.services;
 
 import java.util.List;
 
-
+import javax.ejb.Local;
 
 import com.consultoras.app.cliente.exception.ClienteExistentException;
 import com.consultoras.app.cliente.exception.ClienteNotFoundException;
 import com.consultoras.app.cliente.model.Cliente;
 import com.consultoras.app.common.exception.FieldNotValidException;
 
-
+@Local
 public interface ClienteServices {
 	
 	Cliente testAddCliente() throws FieldNotValidException, ClienteExistentException;
