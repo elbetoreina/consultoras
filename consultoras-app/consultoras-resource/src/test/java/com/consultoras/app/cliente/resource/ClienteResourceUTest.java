@@ -68,7 +68,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithNullPrimerNombre() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "El Primer Nombre del cliente aparece vacio o nulo"));
+				new FieldNotValidException("primerNombre", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
@@ -79,7 +79,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithNullPrimerApellido() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "El Primer Apellido del cliente aparece vacio o nulo"));
+				new FieldNotValidException("primerApellido", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerApellido.json")));
@@ -90,7 +90,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithNullDireccion() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("direccion", "La Direccion del cliente aparece vacia o nula"));
+				.thenThrow(new FieldNotValidException("direccion", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullDireccion.json")));
@@ -101,7 +101,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithNullHoraLocalizacion() {
 		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"La Hora de Localizacion del cliente aparece vacia o nula"));
+				"may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullHoraLocalizacion.json")));
@@ -185,7 +185,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongPrimerNombre() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "El Primer Nombre del Cliente es demasiado largo"));
+				new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerNombre.json")));
@@ -197,7 +197,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongSegundoNombre() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoNombre", "El Segundo Nombre del Cliente es demasiado largo"));
+				new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoNombre.json")));
@@ -209,7 +209,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongPrimerApellido() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "El Primer Apellido del Cliente es demasiado largo"));
+				new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerApellido.json")));
@@ -221,7 +221,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongSegundoApellido() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado largo"));
+				new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoApellido.json")));
@@ -233,7 +233,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongApellidoCasada() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado largo"));
+				new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongApellidoCasada.json")));
@@ -245,7 +245,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithLongHoraLocalizacion() {
 
 		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"El valor de la hora de localizacion es demasiado largo"));
+				"size must be between 2 and 20"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongHoraLocalizacion.json")));
@@ -257,7 +257,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortPrimerNombre() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "El Primer Nombre del Cliente es demasiado corto"));
+				new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerNombre.json")));
@@ -269,7 +269,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortSegundoNombre() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoNombre", "El Segundo Nombre del Cliente es demasiado corto"));
+				new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoNombre.json")));
@@ -281,7 +281,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortPrimerApellido() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "El Primer Apellido del Cliente es demasiado corto"));
+				new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerApellido.json")));
@@ -293,7 +293,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortSegundoApellido() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado corto"));
+				new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoApellido.json")));
@@ -305,7 +305,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortApellidoCasada() {
 
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado corto"));
+				new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortApellidoCasada.json")));
@@ -317,7 +317,7 @@ public class ClienteResourceUTest {
 	public void addClienteWithShortHoraLocalizacion() {
 
 		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"El valor de la hora de localizacion es demasiado corto"));
+				"size must be between 2 and 20"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortHoraLocalizacion.json")));
@@ -328,7 +328,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortDireccion() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado corta"));
+				.thenThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortDireccion.json")));
@@ -339,7 +339,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongDireccion() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado larga"));
+				.thenThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongDireccion.json")));
@@ -350,7 +350,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithInvalidEmail() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("email", "La direccion de correo del cliente es invalida"));
+				.thenThrow(new FieldNotValidException("email", "not a well-formed email address"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithInvalidEmail.json")));
@@ -361,7 +361,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongEmail() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("email", "La direccion de correo del cliente es muy larga"));
+				.thenThrow(new FieldNotValidException("email", "not a well-formed email address"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongEmail.json")));
@@ -372,7 +372,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortCelular() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy corto"));
+				.thenThrow(new FieldNotValidException("celular", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortCelular.json")));
@@ -383,7 +383,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongCelular() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy largo"));
+				.thenThrow(new FieldNotValidException("celular", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongCelular.json")));
@@ -394,7 +394,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortTelefonoCasa() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy corto"));
+				.thenThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoCasa.json")));
@@ -405,7 +405,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongTelefonoCasa() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy largo"));
+				.thenThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoCasa.json")));
@@ -416,7 +416,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortTelefonoOficina() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy corto"));
+				new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficina.json")));
@@ -427,7 +427,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongTelefonoOficina() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy largo"));
+				new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficina.json")));
@@ -438,7 +438,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortTelefonoConyuge() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy corto"));
+				new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoConyuge.json")));
@@ -449,7 +449,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongTelefonoConyuge() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy largo"));
+				new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoConyuge.json")));
@@ -460,7 +460,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongFotografia() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy larga"));
+				new FieldNotValidException("fotografia", "size must be between 2 and 500"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongFotografia.json")));
@@ -471,7 +471,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortFotografia() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy corta"));
+				new FieldNotValidException("fotografia", "size must be between 2 and 500"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortFotografia.json")));
@@ -482,7 +482,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongReferidoPor() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy largo"));
+				.thenThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongReferidoPor.json")));
@@ -493,7 +493,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortReferidoPor() {
 		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy corto"));
+				.thenThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortReferidoPor.json")));
@@ -531,7 +531,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithFutureFechaNacimiento() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fechaNacimiento", "La fecha de nacimiento no puede estar en el futuro"));
+				new FieldNotValidException("fechaNacimiento", "must be in the past"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaNacimiento.json")));
@@ -542,7 +542,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithFutureFechaAniversario() {
 		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fechaAniversario", "La fecha de aniversario no puede estar en el futuro"));
+				new FieldNotValidException("fechaAniversario", "must be in the past"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaAniversario.json")));
@@ -580,7 +580,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "El Primer Nombre del cliente aparece vacio o nulo"))
+		doThrow(new FieldNotValidException("primerNombre", "may not be null"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -592,7 +592,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "El Primer Apellido del cliente aparece vacio o nulo"))
+		doThrow(new FieldNotValidException("primerApellido", "may not be null"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -604,7 +604,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "La Direccion del cliente aparece vacia o nula"))
+		doThrow(new FieldNotValidException("direccion", "may not be null"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -617,7 +617,7 @@ public class ClienteResourceUTest {
 	public void updateClienteWithNullHoraLocalizacion() {
 
 		doThrow(new FieldNotValidException("horaLocalizacion",
-				"La Hora de Localizacion del cliente aparece vacia o nula")).when(clienteServices).testUpdateCliente();
+				"may not be null")).when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullHoraLocalizacion.json")));
@@ -702,7 +702,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "El Primer Nombre del Cliente es demasiado largo"))
+		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -714,7 +714,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongSegundoNombre() {
 
-		doThrow(new FieldNotValidException("segundoNombre", "El Segundo Nombre del Cliente es demasiado largo"))
+		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -726,7 +726,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "El Primer Apellido del Cliente es demasiado largo"))
+		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -738,7 +738,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongSegundoApellido() {
 
-		doThrow(new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado largo"))
+		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -750,7 +750,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongApellidoCasada() {
 
-		doThrow(new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado largo"))
+		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -763,7 +763,7 @@ public class ClienteResourceUTest {
 	public void updateClienteWithLongHoraLocalizacion() {
 
 		doThrow(new FieldNotValidException("horaLocalizacion",
-				"El valor de la hora de localizacion es demasiado largo")).when(clienteServices).testUpdateCliente();
+				"size must be between 2 and 20")).when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongHoraLocalizacion.json")));
@@ -774,7 +774,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "El Primer Nombre del Cliente es demasiado corto"))
+		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -786,7 +786,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortSegundoNombre() {
 
-		doThrow(new FieldNotValidException("segundoNombre", "El Segundo Nombre del Cliente es demasiado corto"))
+		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -798,7 +798,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "El Primer Apellido del Cliente es demasiado corto"))
+		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -811,7 +811,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortSegundoApellido() {
 
-		doThrow(new FieldNotValidException("segundoApellido", "El Segundo Apellido del Cliente es demasiado corto"))
+		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -824,7 +824,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortApellidoCasada() {
 
-		doThrow(new FieldNotValidException("apellidoCasada", "El Apellido de Casada del Cliente es demasiado corto"))
+		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -837,7 +837,7 @@ public class ClienteResourceUTest {
 	public void updateClienteWithShortHoraLocalizacion() {
 
 		doThrow(new FieldNotValidException("horaLocalizacion",
-				"El valor de la hora de localizacion es demasiado corto")).when(clienteServices).testUpdateCliente();
+				"size must be between 2 and 20")).when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortHoraLocalizacion.json")));
@@ -848,7 +848,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado corta"))
+		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -861,7 +861,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "La Direccion del cliente es demasiado larga"))
+		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -874,7 +874,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithInvalidEmail() {
 
-		doThrow(new FieldNotValidException("email", "La direccion de correo del cliente es invalida"))
+		doThrow(new FieldNotValidException("email", "not a well-formed email address"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -887,7 +887,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongEmail() {
 
-		doThrow(new FieldNotValidException("email", "La direccion de correo del cliente es muy larga"))
+		doThrow(new FieldNotValidException("email", "not a well-formed email address"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -899,7 +899,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortCelular() {
 
-		doThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy corto"))
+		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -911,7 +911,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongCelular() {
 
-		doThrow(new FieldNotValidException("celular", "El numero de telefono celular es muy largo"))
+		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -924,7 +924,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoCasa() {
 
-		doThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy corto"))
+		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -937,7 +937,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoCasa() {
 
-		doThrow(new FieldNotValidException("telefonoCasa", "El numero de telefono de casa es muy largo"))
+		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -950,7 +950,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoOficina() {
 
-		doThrow(new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy corto"))
+		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -963,7 +963,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoOficina() {
 
-		doThrow(new FieldNotValidException("telefonoOficina", "El numero de telefono de oficina es muy largo"))
+		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -976,7 +976,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoConyuge() {
 
-		doThrow(new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy corto"))
+		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -988,7 +988,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoConyuge() {
 
-		doThrow(new FieldNotValidException("telefonoConyuge", "El numero de telefono de conyuge es muy largo"))
+		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1000,7 +1000,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongFotografia() {
 
-		doThrow(new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy larga"))
+		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1013,7 +1013,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortFotografia() {
 
-		doThrow(new FieldNotValidException("fotografia", "La ubicacion de el archivo de fotografia es muy corta"))
+		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1026,7 +1026,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongReferidoPor() {
 
-		doThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy largo"))
+		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1039,7 +1039,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortReferidoPor() {
 
-		doThrow(new FieldNotValidException("referidoPor", "El nombre de persona que refiere es muy corto"))
+		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1079,7 +1079,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithFutureFechaNacimiento() {
 
-		doThrow(new FieldNotValidException("fechaNacimiento", "La fecha de nacimiento no puede estar en el futuro"))
+		doThrow(new FieldNotValidException("fechaNacimiento", "must be in the past"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
@@ -1091,7 +1091,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithFutureFechaAniversario() {
 
-		doThrow(new FieldNotValidException("fechaAniversario", "La fecha de aniversario no puede estar en el futuro"))
+		doThrow(new FieldNotValidException("fechaAniversario", "must be in the past"))
 				.when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,

@@ -58,4 +58,17 @@ public class ResourceClient {
 		return readJsonFile(fileName);
 	}
 
+	public void delete() {
+		buildClient().delete();
+		
+	}
+	
+	public Response putWithContent(final String content) {
+		return buildClient().put(Entity.entity(content, MediaType.APPLICATION_JSON));
+	}
+
+	public Response putWithFile(String fileName) {
+		return putWithContent(getRequestFromFileOrEmptyIfNullFile(fileName));
+	}
+
 }

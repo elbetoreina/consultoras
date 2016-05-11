@@ -1,4 +1,4 @@
 {
     "errorIdentification":"cliente.invalidField.primerApellido",
-    "errorDescription":"El Primer Apellido del cliente aparece vacio o nulo"
+    "errorDescription":"may not be null"
 }

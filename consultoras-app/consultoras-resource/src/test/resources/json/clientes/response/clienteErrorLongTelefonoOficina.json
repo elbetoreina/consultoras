@@ -1,4 +1,4 @@
 {
     "errorIdentification":"cliente.invalidField.telefonoOficina",
-    "errorDescription":"El numero de telefono de oficina es muy largo"
+    "errorDescription":"size must be between 8 and 25"
 }

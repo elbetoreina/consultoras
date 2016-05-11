@@ -1,4 +1,4 @@
 {
     "errorIdentification":"cliente.invalidField.horaLocalizacion",
-    "errorDescription":"El valor de la hora de localizacion es demasiado corto"
+    "errorDescription":"size must be between 2 and 20"
 }

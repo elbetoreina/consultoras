@@ -1,4 +1,4 @@
 {
     "errorIdentification":"cliente.invalidField.segundoNombre",
-    "errorDescription":"El Segundo Nombre del Cliente es demasiado corto"
+    "errorDescription":"size must be between 2 and 100"
 }

@@ -1,4 +1,4 @@
 {
     "errorIdentification":"cliente.invalidField.referidoPor",
-    "errorDescription":"El nombre de persona que refiere es muy corto"
+    "errorDescription":"size must be between 2 and 200"
 }
