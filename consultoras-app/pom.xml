@@ -98,6 +98,12 @@
 				<groupId>com.consultoras</groupId>
 				<artifactId>consultoras-model</artifactId>
 				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.consultoras</groupId>
+				<artifactId>consultoras-model</artifactId>
+				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
@@ -110,6 +116,18 @@
 				<artifactId>consultoras-resource</artifactId>
 				<version>${project.version}</version>
 				<type>test-jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.consultoras</groupId>
+				<artifactId>consultoras-resource-war</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.consultoras</groupId>
+				<artifactId>consultoras-resource-war</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
 			</dependency>
 			
 		</dependencies>
@@ -163,5 +181,7 @@
 		<module>consultoras-model</module>
 		<module>consultoras-resource</module>		
 		<module>consultoras-int-tests</module>
+		<module>consultoras-resource-war</module>
+		<module>consultoras-ear</module>
 	</modules>
 </project>
