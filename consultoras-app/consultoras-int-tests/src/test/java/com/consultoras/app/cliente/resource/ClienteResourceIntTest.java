@@ -31,6 +31,7 @@ import com.consultoras.app.common.model.HttpCode;
 import com.consultoras.app.commontests.utils.IntTestUtils;
 import com.consultoras.app.commontests.utils.ResourceClient;
 import com.consultoras.app.commontests.utils.ResourceDefinitions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @RunWith(Arquillian.class)
@@ -1062,6 +1063,66 @@ public class ClienteResourceIntTest {
 		assertJsonResponseWithFile(response, "clienteErrorFutureFechaAniversario.json");
 	}
 	
+	@Test
+	@RunAsClient
+	public void updateClienteWithDataBelongingToOtherCliente() {
+		final Long luciaId = addClienteAndGetId("cliente.json");
+		addClienteAndGetId("clienteMaria.json");
+		
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + luciaId).putWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteMaria.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteAlreadyExists.json");
+	}
+	
+	@Test
+	@RunAsClient
+	public void updateClienteNotFound() {
+				
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/999").putWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteMaria.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
+		assertJsonResponseWithFile(response, "clienteNotFound.json");
+	}
+	
+	@Test
+	@RunAsClient
+	public void findAllClientes() {
+		resourceClient.resourcePath("DB/" + PATH_RESOURCE).postWithContent("");
+
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE).get();
+		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
+		assertResponseContainsTheClientes(response, 3, enieytilde(), lucia(), maria());
+	}
+	
+	private void assertResponseContainsTheClientes(final Response response, final int expectedTotalRecords,
+			final Cliente... expectedClientes) {
+		final JsonObject result = JsonReader.readAsJsonObject(response.readEntity(String.class));
+
+		final int totalRecords = result.getAsJsonObject("paging").get("totalRecords").getAsInt();
+		assertThat(totalRecords, is(equalTo(expectedTotalRecords)));
+
+		final JsonArray clientesList = result.getAsJsonArray("entries");
+		assertThat(clientesList.size(), is(equalTo(expectedClientes.length)));
+
+		for (int i = 0; i < expectedClientes.length; i++) {
+			final Cliente expectedCliente = expectedClientes[i];
+			assertThat(clientesList.get(i).getAsJsonObject().get("primerNombre").getAsString(),
+					is(equalTo(expectedCliente.getPrimerNombre())));
+		}
+
+	}
+	
+	@Test
+	@RunAsClient
+	public void findClienteNotFound() {
+				
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/999").get();
+		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
+		
+	}
 	
 	
 	
