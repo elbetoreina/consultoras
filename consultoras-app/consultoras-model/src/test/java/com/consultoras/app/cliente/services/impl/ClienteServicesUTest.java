@@ -59,19 +59,19 @@ public class ClienteServicesUTest {
 	}
 
 	@Test
-	public void addClienteWithNullConsultoraId() {
+	public void addClienteWithNullConsultora() {
 
 		Cliente cliente = new Cliente();
 
 		cliente = lucia();
 
-		cliente.setConsultoraId(null);
+		cliente.setConsultora(null);
 
 		try {
 			clienteServices.add(cliente);
 			fail("An error should have been thrown");
 		} catch (final FieldNotValidException e) {
-			assertThat(e.getFieldName(), is(equalTo("consultoraId")));
+			assertThat(e.getFieldName(), is(equalTo("consultora")));
 		}
 
 	}
@@ -342,13 +342,13 @@ public class ClienteServicesUTest {
 
 		cliente = lucia();
 
-		cliente.setConsultoraId(null);
+		cliente.setConsultora(null);
 
 		try {
 			clienteServices.update(cliente);
 			fail("An error should have been thrown");
 		} catch (final FieldNotValidException e) {
-			assertThat(e.getFieldName(), is(equalTo("consultoraId")));
+			assertThat(e.getFieldName(), is(equalTo("consultora")));
 		}
 	}
 	

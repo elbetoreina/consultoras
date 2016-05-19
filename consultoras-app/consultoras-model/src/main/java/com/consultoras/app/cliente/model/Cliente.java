@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,6 +20,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.consultoras.app.consultora.model.Consultora;
 
 @Entity
 @Table(name = "tbl_cliente")
@@ -29,9 +33,10 @@ public class Cliente implements Serializable {
 	@Column(name = "tbl_cliente_id")
 	private Long id;
 	
-	@NotNull	
-	@Column(name = "tbl_cliente_consultora_id")
-	private Long consultoraId;	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "tbl_cliente_consultora_id")
+	private Consultora consultora;	
 
 	@NotNull
 	@Size(min = 2, max = 100)
@@ -149,7 +154,7 @@ public class Cliente implements Serializable {
 
 	};
 
-	public Cliente(final long consultoraId, final String primerNombre, final String segundoNombre, final String primerApellido,
+	public Cliente(final Consultora consultora, final String primerNombre, final String segundoNombre, final String primerApellido,
 			final String segundoApellido, final String apellidoCasada, final Calendar fechaNacimiento,
 			final Calendar fechaAniversario, final String horaLocalizacion, final String direccion, final String email,
 			final String celular, final String telefonoCasa, final String telefonoOficina,
@@ -158,7 +163,7 @@ public class Cliente implements Serializable {
 			final TipoPiel tipoPiel, final TonoPiel tonoPiel, final ColorCabello colorCabello,
 			final ColorOjos colorOjos, final Calendar fechaClientePreferido, final String referidoPor) {
 
-		this.consultoraId =  consultoraId;
+		this.consultora =  consultora;
 		this.primerNombre = primerNombre;
 		this.segundoNombre = segundoNombre;
 		this.primerApellido = primerApellido;
@@ -195,12 +200,12 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 	
-	public Long getConsultoraId() {
-		return consultoraId;
+	public Consultora getConsultora() {
+		return consultora;
 	}
 
-	public void setConsultoraId(Long consultoraId) {
-		this.consultoraId = consultoraId;
+	public void setConsultora(Consultora consultora) {
+		this.consultora = consultora;
 	}
 
 	public String getPrimerNombre() {
@@ -419,7 +424,7 @@ public class Cliente implements Serializable {
 		result = prime * result + ((celular == null) ? 0 : celular.hashCode());
 		result = prime * result + ((colorCabello == null) ? 0 : colorCabello.hashCode());
 		result = prime * result + ((colorOjos == null) ? 0 : colorOjos.hashCode());
-		result = prime * result + ((consultoraId == null) ? 0 : consultoraId.hashCode());
+		result = prime * result + ((consultora == null) ? 0 : consultora.hashCode());
 		result = prime * result + ((direccion == null) ? 0 : direccion.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fechaAniversario == null) ? 0 : fechaAniversario.hashCode());
@@ -469,10 +474,10 @@ public class Cliente implements Serializable {
 			return false;
 		if (colorOjos != other.colorOjos)
 			return false;
-		if (consultoraId == null) {
-			if (other.consultoraId != null)
+		if (consultora == null) {
+			if (other.consultora != null)
 				return false;
-		} else if (!consultoraId.equals(other.consultoraId))
+		} else if (!consultora.equals(other.consultora))
 			return false;
 		if (direccion == null) {
 			if (other.direccion != null)
@@ -576,7 +581,7 @@ public class Cliente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", consultoraId=" + consultoraId + ", primerNombre=" + primerNombre
+		return "Cliente [id=" + id + ", consultora=" + consultora + ", primerNombre=" + primerNombre
 				+ ", segundoNombre=" + segundoNombre + ", primerApellido=" + primerApellido + ", segundoApellido="
 				+ segundoApellido + ", apellidoCasada=" + apellidoCasada + ", fechaNacimiento=" + fechaNacimiento
 				+ ", fechaAniversario=" + fechaAniversario + ", horaLocalizacion=" + horaLocalizacion + ", direccion="
@@ -588,6 +593,7 @@ public class Cliente implements Serializable {
 				+ ", fechaClientePreferido=" + fechaClientePreferido + ", referidoPor=" + referidoPor + "]";
 	}
 
+	
 	
 
 }

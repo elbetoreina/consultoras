@@ -1,6 +1,7 @@
 package com.consultoras.app.cliente.repository;
 
 import static com.consultoras.app.commontests.cliente.ClienteForTestsRepository.*;
+import static com.consultoras.app.commontests.consultora.ConsultoraForTestsRepository.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -16,12 +17,14 @@ import org.junit.Test;
 
 import com.consultoras.app.cliente.model.Cliente;
 import com.consultoras.app.commontests.utils.DBCommandTransactionalExecutor;
+import com.consultoras.app.consultora.repository.ConsultoraRepository;
 
 public class ClienteRepositoryUTest {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	private ClienteRepository clienteRepository;
+	private ConsultoraRepository consultoraRepository;
 	private DBCommandTransactionalExecutor dbCommandTransactionalExecutor;
 
 	@Before
@@ -29,6 +32,8 @@ public class ClienteRepositoryUTest {
 		emf = Persistence.createEntityManagerFactory("consultorasPU");
 		em = emf.createEntityManager();
 
+		consultoraRepository = new ConsultoraRepository();
+		consultoraRepository.em = em;
 		clienteRepository = new ClienteRepository();
 		clienteRepository.em = em;
 
@@ -43,6 +48,11 @@ public class ClienteRepositoryUTest {
 
 	@Test
 	public void addClienteAndFindIt() {
+
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+
 		final Long clienteAddedId = dbCommandTransactionalExecutor.executeCommand(() -> {
 			return clienteRepository.add(lucia()).getId();
 		});
@@ -71,17 +81,22 @@ public class ClienteRepositoryUTest {
 
 	@Test
 	public void updateCliente() {
+		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+		
 		final Long clienteAddedId = dbCommandTransactionalExecutor.executeCommand(() -> {
 			return clienteRepository.add(lucia()).getId();
 		});
-		
+
 		assertThat(clienteAddedId, is(notNullValue()));
 
 		final Cliente clienteAfterAdd = clienteRepository.findById(clienteAddedId);
-		
-		CompareClientes(clienteAfterAdd, lucia());		
-		
-		clienteAfterAdd.setConsultoraId(maria().getConsultoraId());
+
+		CompareClientes(clienteAfterAdd, lucia());
+
+		clienteAfterAdd.setConsultora(maria().getConsultora());
 		clienteAfterAdd.setPrimerNombre(maria().getPrimerNombre());
 		clienteAfterAdd.setSegundoNombre(maria().getSegundoNombre());
 		clienteAfterAdd.setPrimerApellido(maria().getPrimerApellido());
@@ -109,59 +124,72 @@ public class ClienteRepositoryUTest {
 		clienteAfterAdd.setColorOjos(maria().getColorOjos());
 		clienteAfterAdd.setFechaClientePreferido(maria().getFechaClientePreferido());
 		clienteAfterAdd.setReferidoPor(maria().getReferidoPor());
-		
+
 		dbCommandTransactionalExecutor.executeCommand(() -> {
 			clienteRepository.update(clienteAfterAdd);
 			return null;
 		});
-		
+
 		final Cliente categoryAfterUpdate = clienteRepository.findById(clienteAddedId);
-		
+
 		CompareClientes(categoryAfterUpdate, maria());
 
 	}
-	
+
 	@Test
-	public void deleteCliente(){
+	public void deleteCliente() {
 		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+
 		final Long clienteAddedId = dbCommandTransactionalExecutor.executeCommand(() -> {
 			return clienteRepository.add(lucia()).getId();
 		});
-		
+
 		assertThat(clienteAddedId, is(notNullValue()));
 
 		final Cliente clienteAfterAdd = clienteRepository.findById(clienteAddedId);
-		
+
 		dbCommandTransactionalExecutor.executeCommand(() -> {
 			clienteRepository.delete(clienteAfterAdd);
 			return null;
 		});
-		
+
 		final Cliente clienteAfterDelete = clienteRepository.findById(clienteAddedId);
-		
+
 		assertThat(clienteAfterDelete, is(nullValue()));
-		
+
 	}
-	
+
 	@Test
-	public void findAllClientes(){
+	public void findAllClientes() {
+		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+		
 		dbCommandTransactionalExecutor.executeCommand(() -> {
 			allClientes().forEach(clienteRepository::add);
 			return null;
 		});
-		
+
 		final List<Cliente> clientes = clienteRepository.findAll("primerNombre");
-		
+
 		assertThat(clientes.size(), is(equalTo(3)));
 		assertThat(clientes.get(0).getPrimerNombre(), is(equalTo(enieytilde().getPrimerNombre())));
 		assertThat(clientes.get(1).getPrimerNombre(), is(equalTo(lucia().getPrimerNombre())));
 		assertThat(clientes.get(2).getPrimerNombre(), is(equalTo(maria().getPrimerNombre())));
-		
+
 	}
-	
-	
+
 	@Test
 	public void alreadyExistsForAdd() {
+		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+		
 		dbCommandTransactionalExecutor.executeCommand(() -> {
 			clienteRepository.add(lucia());
 			return null;
@@ -170,9 +198,14 @@ public class ClienteRepositoryUTest {
 		assertThat(clienteRepository.alreadyExists(lucia()), is(equalTo(true)));
 		assertThat(clienteRepository.alreadyExists(maria()), is(equalTo(false)));
 	}
-	
+
 	@Test
 	public void alreadyExistsClientWithId() {
+		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+		
 		final Cliente lucia = dbCommandTransactionalExecutor.executeCommand(() -> {
 			clienteRepository.add(maria());
 			return clienteRepository.add(lucia());
@@ -183,18 +216,23 @@ public class ClienteRepositoryUTest {
 		lucia.setPrimerNombre(maria().getPrimerNombre());
 		lucia.setPrimerApellido(maria().getPrimerApellido());
 		lucia.setCelular(maria().getCelular());
-		
+
 		assertThat(clienteRepository.alreadyExists(lucia), is(equalTo(true)));
 
 		lucia.setPrimerNombre(enieytilde().getPrimerNombre());
 		lucia.setPrimerApellido(enieytilde().getPrimerApellido());
 		lucia.setCelular(maria().getCelular());
-		
+
 		assertThat(clienteRepository.alreadyExists(lucia), is(equalTo(false)));
 	}
-	
+
 	@Test
 	public void existsById() {
+		
+		dbCommandTransactionalExecutor.executeCommand(() -> {
+			return consultoraRepository.add(mary()).getId();
+		});
+		
 		final Long clienteAddedId = dbCommandTransactionalExecutor.executeCommand(() -> {
 			return clienteRepository.add(lucia()).getId();
 		});
@@ -207,7 +245,7 @@ public class ClienteRepositoryUTest {
 	public void CompareClientes(Cliente clienteOrigen, Cliente clienteDestino) {
 		assertThat(clienteOrigen, is(notNullValue()));
 
-		assertThat(clienteOrigen.getConsultoraId(), is(equalTo(clienteDestino.getConsultoraId())));
+		assertThat(clienteOrigen.getConsultora(), is(equalTo(clienteDestino.getConsultora())));
 		assertThat(clienteOrigen.getPrimerNombre(), is(equalTo(clienteDestino.getPrimerNombre())));
 		assertThat(clienteOrigen.getSegundoNombre(), is(equalTo(clienteDestino.getSegundoNombre())));
 		assertThat(clienteOrigen.getPrimerApellido(), is(equalTo(clienteDestino.getPrimerApellido())));
@@ -227,7 +265,8 @@ public class ClienteRepositoryUTest {
 		assertThat(clienteOrigen.getCelular(), is(equalTo(clienteDestino.getCelular())));
 		assertThat(clienteOrigen.getTelefonoCasa(), is(equalTo(clienteDestino.getTelefonoCasa())));
 		assertThat(clienteOrigen.getTelefonoOficina(), is(equalTo(clienteDestino.getTelefonoOficina())));
-		assertThat(clienteOrigen.getTelefonoOficinaExtension(), is(equalTo(clienteDestino.getTelefonoOficinaExtension())));
+		assertThat(clienteOrigen.getTelefonoOficinaExtension(),
+				is(equalTo(clienteDestino.getTelefonoOficinaExtension())));
 		assertThat(clienteOrigen.getTelefonoConyuge(), is(equalTo(clienteDestino.getTelefonoConyuge())));
 		assertThat(clienteOrigen.getFotografia(), is(equalTo(clienteDestino.getFotografia())));
 		assertThat(clienteOrigen.getRangoEdad(), is(equalTo(clienteDestino.getRangoEdad())));

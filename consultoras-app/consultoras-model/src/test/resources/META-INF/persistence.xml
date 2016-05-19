@@ -6,6 +6,7 @@
 	<persistence-unit name="consultorasPU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.consultoras.app.cliente.model.Cliente</class>
+		<class>com.consultoras.app.consultora.model.Consultora</class>
 		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
