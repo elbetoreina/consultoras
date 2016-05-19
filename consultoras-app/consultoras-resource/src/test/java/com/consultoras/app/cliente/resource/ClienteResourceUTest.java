@@ -64,6 +64,16 @@ public class ClienteResourceUTest {
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteAlreadyExists.json");
 	}
+	
+	@Test
+	public void addClienteWithNullConsultoraId() {
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("consultoraId", "may not be null"));
+
+		final Response response = clienteResource
+				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorNullPrimerNombre.json");
+	}
 
 	@Test
 	public void addClienteWithNullPrimerNombre() {
