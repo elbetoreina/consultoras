@@ -59,7 +59,7 @@ public class ClienteResourceIntTest {
 	public void initTestCase() {
 		this.resourceClient = new ResourceClient(url);
 		
-		resourceClient.resourcePath("/DB").delete();
+		resourceClient.resourcePath("/DB").deleteAll();
 
 	}
 
@@ -437,6 +437,26 @@ public class ClienteResourceIntTest {
 
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficina.json");
+	}
+	
+	@Test
+	@RunAsClient
+	public void addClienteWithLongTelefonoOficinaExtension() {
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE).postWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficinaExtension.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficinaExtension.json");
+	}
+	
+	@Test
+	@RunAsClient
+	public void addClienteWithShortTelefonoOficinaExtension() {
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE).postWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficinaExtension.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficinaExtension.json");
 	}
 	
 	
@@ -819,6 +839,28 @@ public class ClienteResourceIntTest {
 	
 	@Test
 	@RunAsClient
+	public void updateClienteWithLongTelefonoOficinaExtension() {
+		final Long id = addClienteAndGetId("cliente.json");
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + id).putWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficinaExtension.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficinaExtension.json");
+	}
+	
+	@Test
+	@RunAsClient
+	public void updateClienteWithShortTelefonoOficinaExtension() {
+		final Long id = addClienteAndGetId("cliente.json");
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + id).putWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficinaExtension.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficinaExtension.json");
+	}
+	
+	@Test
+	@RunAsClient
 	public void updateClienteWithLongTelefonoConyuge() {
 		final Long id = addClienteAndGetId("cliente.json");
 		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + id).putWithFile(
@@ -1125,10 +1167,29 @@ public class ClienteResourceIntTest {
 	}
 	
 	
+	@Test
+	@RunAsClient
+	public void deleteCliente() {
+		
+		final Long id = addClienteAndGetId("cliente.json");
+		findClienteAndAssertResponseWithCliente(id, lucia());
+		
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + id).delete();
+		
+		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
+		
+	}
 	
 	
-	
-	
+	@Test
+	@RunAsClient
+	public void deleteClienteNotFound() {
+		
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/999").delete();
+		
+		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
+		
+	}
 	
 	private Long addClienteAndGetId(final String fileName) {
 		return IntTestUtils.addElementWithFileAndGetId(resourceClient, PATH_RESOURCE, PATH_RESOURCE, fileName);

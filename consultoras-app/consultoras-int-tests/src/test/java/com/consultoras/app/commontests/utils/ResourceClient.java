@@ -58,9 +58,13 @@ public class ResourceClient {
 		return readJsonFile(fileName);
 	}
 
-	public void delete() {
+	public void deleteAll() {
 		buildClient().delete();
 		
+	}
+	
+	public Response delete(){
+		return buildClient().delete();
 	}
 	
 	public Response putWithContent(final String content) {

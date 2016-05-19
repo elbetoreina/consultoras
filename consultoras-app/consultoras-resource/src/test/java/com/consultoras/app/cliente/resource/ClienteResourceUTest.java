@@ -67,8 +67,7 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithNullPrimerNombre() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "may not be null"));
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("primerNombre", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
@@ -78,8 +77,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithNullPrimerApellido() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "may not be null"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("primerApellido", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerApellido.json")));
@@ -89,8 +88,7 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithNullDireccion() {
-		when(clienteServices.testAddCliente())
-				.thenThrow(new FieldNotValidException("direccion", "may not be null"));
+		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("direccion", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullDireccion.json")));
@@ -100,8 +98,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithNullHoraLocalizacion() {
-		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"may not be null"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("horaLocalizacion", "may not be null"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullHoraLocalizacion.json")));
@@ -184,8 +182,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongPrimerNombre() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerNombre.json")));
@@ -196,8 +194,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongSegundoNombre() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoNombre.json")));
@@ -208,8 +206,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongPrimerApellido() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerApellido.json")));
@@ -220,8 +218,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongSegundoApellido() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoApellido.json")));
@@ -232,8 +230,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongApellidoCasada() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongApellidoCasada.json")));
@@ -244,8 +242,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithLongHoraLocalizacion() {
 
-		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"size must be between 2 and 20"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("horaLocalizacion", "size must be between 2 and 20"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongHoraLocalizacion.json")));
@@ -256,8 +254,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortPrimerNombre() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerNombre.json")));
@@ -268,8 +266,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortSegundoNombre() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoNombre.json")));
@@ -280,8 +278,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortPrimerApellido() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerApellido.json")));
@@ -292,8 +290,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortSegundoApellido() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoApellido.json")));
@@ -304,8 +302,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortApellidoCasada() {
 
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortApellidoCasada.json")));
@@ -316,8 +314,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void addClienteWithShortHoraLocalizacion() {
 
-		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("horaLocalizacion",
-				"size must be between 2 and 20"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("horaLocalizacion", "size must be between 2 and 20"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortHoraLocalizacion.json")));
@@ -415,8 +413,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithShortTelefonoOficina() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficina.json")));
@@ -426,8 +424,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithLongTelefonoOficina() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficina.json")));
@@ -436,9 +434,53 @@ public class ClienteResourceUTest {
 	}
 
 	@Test
+	public void addClienteWithShortTelefonoOficinaExtension() {
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoOficinaExtension", "size must be between 1 and 10"));
+
+		final Response response = clienteResource.addTest(
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficinaExtension.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficinaExtension.json");
+	}
+
+	@Test
+	public void addClienteWithLongTelefonoOficinaExtension() {
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoOficinaExtension", "size must be between 1 and 10"));
+
+		final Response response = clienteResource.addTest(
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficinaExtension.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficinaExtension.json");
+	}
+
+	@Test
+	public void updateClienteWithLongTelefonoOficinaExtension() {
+		doThrow(new FieldNotValidException("telefonoOficinaExtension", "size must be between 1 and 10"))
+				.when(clienteServices).testUpdateCliente();
+
+		final Response response = clienteResource.updateTest(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficinaExtension.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficinaExtension.json");
+	}
+	
+	@Test
+	public void updateClienteWithShortTelefonoOficinaExtension() {
+		doThrow(new FieldNotValidException("telefonoOficinaExtension", "size must be between 1 and 10"))
+				.when(clienteServices).testUpdateCliente();
+
+		final Response response = clienteResource.updateTest(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficinaExtension.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorShortTelefonoOficinaExtension.json");
+	}
+
+	@Test
 	public void addClienteWithShortTelefonoConyuge() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoConyuge.json")));
@@ -448,8 +490,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithLongTelefonoConyuge() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoConyuge.json")));
@@ -459,8 +501,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithLongFotografia() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fotografia", "size must be between 2 and 500"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongFotografia.json")));
@@ -470,8 +512,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithShortFotografia() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fotografia", "size must be between 2 and 500"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortFotografia.json")));
@@ -530,8 +572,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithFutureFechaNacimiento() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fechaNacimiento", "must be in the past"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("fechaNacimiento", "must be in the past"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaNacimiento.json")));
@@ -541,8 +583,8 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void addClienteWithFutureFechaAniversario() {
-		when(clienteServices.testAddCliente()).thenThrow(
-				new FieldNotValidException("fechaAniversario", "must be in the past"));
+		when(clienteServices.testAddCliente())
+				.thenThrow(new FieldNotValidException("fechaAniversario", "must be in the past"));
 
 		final Response response = clienteResource
 				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaAniversario.json")));
@@ -580,8 +622,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "may not be null"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerNombre", "may not be null")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
@@ -592,8 +634,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "may not be null"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerApellido", "may not be null")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerApellido.json")));
@@ -604,8 +646,7 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "may not be null"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("direccion", "may not be null")).when(clienteServices).testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullDireccion.json")));
@@ -616,8 +657,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithNullHoraLocalizacion() {
 
-		doThrow(new FieldNotValidException("horaLocalizacion",
-				"may not be null")).when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("horaLocalizacion", "may not be null")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullHoraLocalizacion.json")));
@@ -702,8 +743,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerNombre.json")));
@@ -714,8 +755,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongSegundoNombre() {
 
-		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoNombre.json")));
@@ -726,8 +767,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongPrimerApellido.json")));
@@ -738,8 +779,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongSegundoApellido() {
 
-		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongSegundoApellido.json")));
@@ -750,8 +791,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongApellidoCasada() {
 
-		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongApellidoCasada.json")));
@@ -762,8 +803,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongHoraLocalizacion() {
 
-		doThrow(new FieldNotValidException("horaLocalizacion",
-				"size must be between 2 and 20")).when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("horaLocalizacion", "size must be between 2 and 20")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongHoraLocalizacion.json")));
@@ -774,8 +815,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortPrimerNombre() {
 
-		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerNombre", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerNombre.json")));
@@ -786,8 +827,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortSegundoNombre() {
 
-		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("segundoNombre", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoNombre.json")));
@@ -798,8 +839,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortPrimerApellido() {
 
-		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("primerApellido", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortPrimerApellido.json")));
@@ -811,8 +852,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortSegundoApellido() {
 
-		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("segundoApellido", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortSegundoApellido.json")));
@@ -824,8 +865,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortApellidoCasada() {
 
-		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("apellidoCasada", "size must be between 2 and 100")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortApellidoCasada.json")));
@@ -836,8 +877,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortHoraLocalizacion() {
 
-		doThrow(new FieldNotValidException("horaLocalizacion",
-				"size must be between 2 and 20")).when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("horaLocalizacion", "size must be between 2 and 20")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortHoraLocalizacion.json")));
@@ -848,8 +889,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortDireccion.json")));
@@ -861,8 +902,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongDireccion() {
 
-		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("direccion", "size must be between 2 and 1000")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongDireccion.json")));
@@ -874,8 +915,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithInvalidEmail() {
 
-		doThrow(new FieldNotValidException("email", "not a well-formed email address"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("email", "not a well-formed email address")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithInvalidEmail.json")));
@@ -887,8 +928,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongEmail() {
 
-		doThrow(new FieldNotValidException("email", "not a well-formed email address"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("email", "not a well-formed email address")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongEmail.json")));
@@ -899,8 +940,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortCelular() {
 
-		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortCelular.json")));
@@ -911,8 +952,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongCelular() {
 
-		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("celular", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongCelular.json")));
@@ -924,8 +965,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoCasa() {
 
-		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoCasa.json")));
@@ -937,8 +978,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoCasa() {
 
-		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoCasa", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoCasa.json")));
@@ -950,8 +991,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoOficina() {
 
-		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoOficina.json")));
@@ -963,8 +1004,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoOficina() {
 
-		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoOficina", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoOficina.json")));
@@ -976,8 +1017,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortTelefonoConyuge() {
 
-		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortTelefonoConyuge.json")));
@@ -988,8 +1029,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongTelefonoConyuge() {
 
-		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("telefonoConyuge", "size must be between 8 and 25")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongTelefonoConyuge.json")));
@@ -1000,8 +1041,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongFotografia() {
 
-		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongFotografia.json")));
@@ -1013,8 +1054,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortFotografia() {
 
-		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("fotografia", "size must be between 2 and 500")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortFotografia.json")));
@@ -1026,8 +1067,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithLongReferidoPor() {
 
-		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithLongReferidoPor.json")));
@@ -1039,8 +1080,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithShortReferidoPor() {
 
-		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("referidoPor", "size must be between 2 and 200")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithShortReferidoPor.json")));
@@ -1079,8 +1120,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithFutureFechaNacimiento() {
 
-		doThrow(new FieldNotValidException("fechaNacimiento", "must be in the past"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("fechaNacimiento", "must be in the past")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaNacimiento.json")));
@@ -1091,8 +1132,8 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteWithFutureFechaAniversario() {
 
-		doThrow(new FieldNotValidException("fechaAniversario", "must be in the past"))
-				.when(clienteServices).testUpdateCliente();
+		doThrow(new FieldNotValidException("fechaAniversario", "must be in the past")).when(clienteServices)
+				.testUpdateCliente();
 
 		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithFutureFechaAniversario.json")));
@@ -1115,16 +1156,16 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void findCliente() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteServices.findById(1L)).thenReturn(clienteWithId(cliente, 1L));
 
 		final Response response = clienteResource.findById(1L);
 		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 		assertJsonResponseWithFile(response, "clienteFound.json");
 	}
-	
+
 	@Test
 	public void findClienteNotFound() {
 		when(clienteServices.findById(1L)).thenThrow(new ClienteNotFoundException());
@@ -1132,7 +1173,7 @@ public class ClienteResourceUTest {
 		final Response response = clienteResource.findById(1L);
 		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
 	}
-	
+
 	@Test
 	public void findAllNoCliente() {
 		when(clienteServices.findAll()).thenReturn(new ArrayList<>());
@@ -1141,48 +1182,45 @@ public class ClienteResourceUTest {
 		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 		assertJsonResponseWithFile(response, "emptyListOfClientes.json");
 	}
-	
+
 	@Test
 	public void findAllTwoClientes() {
-		
+
 		Cliente clienteLucia = lucia();
 		Cliente clienteMaria = enieytilde();
-		
-		
-		when(clienteServices.findAll()).thenReturn(
-				Arrays.asList(clienteWithId(clienteLucia, 1L), clienteWithId(clienteMaria, 2L)));
+
+		when(clienteServices.findAll())
+				.thenReturn(Arrays.asList(clienteWithId(clienteLucia, 1L), clienteWithId(clienteMaria, 2L)));
 
 		final Response response = clienteResource.findAll();
 		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 		assertJsonResponseWithFile(response, "twoClientes.json");
 	}
-	
+
 	@Test
-	public void deleteCliente(){
-		
+	public void deleteCliente() {
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteServices.findById(1L)).thenReturn(clienteWithId(cliente, 1L));
 
 		final Response response = clienteResource.delete(1L);
-		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));		
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.OK.getCode())));
 	}
-	
-	
+
 	@Test
-	public void deleteClienteNotFound(){
+	public void deleteClienteNotFound() {
 
 		doThrow(new ClienteNotFoundException()).when(clienteServices).findById(1L);
 
 		final Response response = clienteResource.delete(1L);
-		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));		
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
 	}
-	
-	
+
 	private void assertJsonResponseWithFile(final Response response, final String fileName) {
 		assertJsonMatchesFileContent(response.getEntity().toString(), getPathFileResponse(PATH_RESOURCE, fileName));
 	}
-	
-	
 
 }

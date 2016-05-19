@@ -59,6 +59,24 @@ public class ClienteServicesUTest {
 	}
 
 	@Test
+	public void addClienteWithNullConsultoraId() {
+
+		Cliente cliente = new Cliente();
+
+		cliente = lucia();
+
+		cliente.setConsultoraId(null);
+
+		try {
+			clienteServices.add(cliente);
+			fail("An error should have been thrown");
+		} catch (final FieldNotValidException e) {
+			assertThat(e.getFieldName(), is(equalTo("consultoraId")));
+		}
+
+	}
+
+	@Test
 	public void addClienteWithNullPrimerNombre() {
 		addClienteWithInvalidStringField(null, "primerNombre");
 	}
@@ -134,6 +152,11 @@ public class ClienteServicesUTest {
 	}
 
 	@Test
+	public void addClientWithShortTelefonoOficina() {
+		addClienteWithInvalidStringField("1", "telefonoOficina");
+	}
+
+	@Test
 	public void addClientWithShortFotografia() {
 		addClienteWithInvalidStringField("A", "fotografia");
 	}
@@ -199,6 +222,16 @@ public class ClienteServicesUTest {
 	}
 
 	@Test
+	public void addClientWithLongTelefonoOficina() {
+		addClienteWithInvalidStringField(longName100, "telefonoOficina");
+	}
+
+	@Test
+	public void addClientWithLongTelefonoOficinaExtension() {
+		addClienteWithInvalidStringField("12345678901", "telefonoOficinaExtension");
+	}
+
+	@Test
 	public void addClientWithLongFotografia() {
 		addClienteWithInvalidStringField(longName1000, "fotografia");
 	}
@@ -211,7 +244,7 @@ public class ClienteServicesUTest {
 	@Test
 	public void addClienteWithIncorrectEmail() {
 		addClienteWithInvalidStringField("esto no es un email", "email");
-	}	
+	}
 
 	@Test
 	public void addClienteWithNullFechaNacimiento() {
@@ -255,7 +288,7 @@ public class ClienteServicesUTest {
 		}
 
 	}
-	
+
 	@Test
 	public void AddClienteWithFutureFechaAniversario() {
 
@@ -279,30 +312,45 @@ public class ClienteServicesUTest {
 		}
 
 	}
-	
+
 	@Test(expected = ClienteExistentException.class)
 	public void addClienteWithExistentName() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.alreadyExists(cliente)).thenReturn(true);
 
 		clienteServices.add(cliente);
 	}
-		
+
 	@Test
 	public void addValidCliente() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.alreadyExists(cliente)).thenReturn(false);
-		
+
 		when(clienteRepository.add(cliente)).thenReturn(clienteWithId(cliente, 1L));
 
 		final Cliente clienteAdded = clienteServices.add(cliente);
 		assertThat(clienteAdded.getId(), is(equalTo(1L)));
 	}
-	
+
+	@Test
+	public void updateClienteWithNullConsultoraId() {
+		Cliente cliente = new Cliente();
+
+		cliente = lucia();
+
+		cliente.setConsultoraId(null);
+
+		try {
+			clienteServices.update(cliente);
+			fail("An error should have been thrown");
+		} catch (final FieldNotValidException e) {
+			assertThat(e.getFieldName(), is(equalTo("consultoraId")));
+		}
+	}
 	
 	@Test
 	public void updateClienteWithNullPrimerNombre() {
@@ -388,12 +436,12 @@ public class ClienteServicesUTest {
 	public void updateClienteWithShortReferidoPor() {
 		updateClienteWithInvalidStringField("A", "referidoPor");
 	}
-	
+
 	@Test(expected = ClienteExistentException.class)
 	public void updateClienteWithAlreadyExistentValues() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.alreadyExists(clienteWithId(cliente, 1L))).thenReturn(true);
 
 		clienteServices.update(clienteWithId(cliente, 1L));
@@ -401,63 +449,63 @@ public class ClienteServicesUTest {
 
 	@Test(expected = ClienteNotFoundException.class)
 	public void updateClienteNotFound() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.alreadyExists(clienteWithId(cliente, 1L))).thenReturn(false);
 		when(clienteRepository.existsById(1L)).thenReturn(false);
 
 		clienteServices.update(clienteWithId(cliente, 1L));
 	}
-	
+
 	@Test
 	public void updateValidCliente() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.alreadyExists(clienteWithId(cliente, 1L))).thenReturn(false);
-		
+
 		when(clienteRepository.existsById(1L)).thenReturn(true);
 
 		clienteServices.update(clienteWithId(cliente, 1L));
 
 		verify(clienteRepository).update(clienteWithId(cliente, 1L));
 	}
-	
+
 	@Test
 	public void findClienteById() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.findById(1L)).thenReturn(clienteWithId(cliente, 1L));
 
 		final Cliente clienteFound = clienteServices.findById(1L);
-		
+
 		assertThat(clienteFound, is(notNullValue()));
 		assertThat(clienteFound.getId(), is(equalTo(1L)));
 		assertThat(clienteFound.getPrimerApellido(), is(equalTo(lucia().getPrimerApellido())));
 		assertThat(clienteFound.getPrimerNombre(), is(equalTo(lucia().getPrimerNombre())));
 		assertThat(clienteFound.getCelular(), is(equalTo(lucia().getCelular())));
 	}
-	
+
 	@Test
 	public void findAllClientes() {
-		when(clienteRepository.findAll("primerApellido")).thenReturn(
-				Arrays.asList(clienteWithId(lucia(), 1L), clienteWithId(maria(), 2L)));
+		when(clienteRepository.findAll("primerApellido"))
+				.thenReturn(Arrays.asList(clienteWithId(lucia(), 1L), clienteWithId(maria(), 2L)));
 
 		final List<Cliente> clientes = clienteServices.findAll();
 		assertThat(clientes.size(), is(equalTo(2)));
 		assertThat(clientes.get(0).getPrimerNombre(), is(equalTo(lucia().getPrimerNombre())));
 		assertThat(clientes.get(1).getPrimerNombre(), is(equalTo(maria().getPrimerNombre())));
 	}
-	
+
 	@Test(expected = ClienteNotFoundException.class)
 	public void findClienteByIdNotFound() {
 		when(clienteRepository.findById(1L)).thenReturn(null);
 
 		clienteServices.findById(1L);
 	}
-	
+
 	@Test
 	public void findAllNoClientes() {
 		when(clienteRepository.findAll("primerApellido")).thenReturn(new ArrayList<>());
@@ -465,32 +513,28 @@ public class ClienteServicesUTest {
 		final List<Cliente> clientes = clienteServices.findAll();
 		assertThat(clientes.isEmpty(), is(equalTo(true)));
 	}
-	
+
 	@Test(expected = ClienteNotFoundException.class)
-	public void deleteClienteNotFound(){
-		
-		Cliente cliente = lucia();		
-		
+	public void deleteClienteNotFound() {
+
+		Cliente cliente = lucia();
+
 		when(clienteRepository.existsById(1L)).thenReturn(false);
 
 		clienteServices.delete(clienteWithId(cliente, 1L));
-		
+
 	}
-	
+
 	@Test
 	public void deleteValidCliente() {
-		
+
 		Cliente cliente = lucia();
-		
+
 		when(clienteRepository.existsById(1L)).thenReturn(true);
 
 		clienteServices.delete(clienteWithId(cliente, 1L));
-		
+
 	}
-	
-	
-	
-	
 
 	private void addClienteWithInvalidStringField(final String fieldValue, final String fieldName) {
 
@@ -533,6 +577,9 @@ public class ClienteServicesUTest {
 			case "telefonoOficina":
 				cliente.setTelefonoOficina(fieldValue);
 				break;
+			case "telefonoOficinaExtension":
+				cliente.setTelefonoOficinaExtension(fieldValue);
+				break;
 			case "telefonoConyuge":
 				cliente.setTelefonoConyuge(fieldValue);
 				break;
@@ -542,7 +589,7 @@ public class ClienteServicesUTest {
 			case "referidoPor":
 				cliente.setReferidoPor(fieldValue);
 				break;
-			
+
 			default:
 				break;
 
@@ -553,7 +600,7 @@ public class ClienteServicesUTest {
 			assertThat(e.getFieldName(), is(equalTo(fieldName)));
 		}
 	}
-	
+
 	private void updateClienteWithInvalidStringField(final String fieldValue, final String fieldName) {
 
 		Cliente cliente = new Cliente();
@@ -595,6 +642,9 @@ public class ClienteServicesUTest {
 			case "telefonoOficina":
 				cliente.setTelefonoOficina(fieldValue);
 				break;
+			case "telefonoOficinaExtension":
+				cliente.setTelefonoOficinaExtension(fieldValue);
+				break;
 			case "telefonoConyuge":
 				cliente.setTelefonoConyuge(fieldValue);
 				break;
@@ -604,7 +654,7 @@ public class ClienteServicesUTest {
 			case "referidoPor":
 				cliente.setReferidoPor(fieldValue);
 				break;
-			
+
 			default:
 				break;
 

@@ -81,6 +81,7 @@ public class ClienteRepositoryUTest {
 		
 		CompareClientes(clienteAfterAdd, lucia());		
 		
+		clienteAfterAdd.setConsultoraId(maria().getConsultoraId());
 		clienteAfterAdd.setPrimerNombre(maria().getPrimerNombre());
 		clienteAfterAdd.setSegundoNombre(maria().getSegundoNombre());
 		clienteAfterAdd.setPrimerApellido(maria().getPrimerApellido());
@@ -94,6 +95,8 @@ public class ClienteRepositoryUTest {
 		clienteAfterAdd.setCelular(maria().getCelular());
 		clienteAfterAdd.setTelefonoCasa(maria().getTelefonoCasa());
 		clienteAfterAdd.setTelefonoOficina(maria().getTelefonoOficina());
+		clienteAfterAdd.setTelefonoOficina(maria().getTelefonoOficina());
+		clienteAfterAdd.setTelefonoOficinaExtension(maria().getTelefonoOficinaExtension());
 		clienteAfterAdd.setTelefonoConyuge(maria().getTelefonoConyuge());
 		clienteAfterAdd.setFotografia(maria().getFotografia());
 		clienteAfterAdd.setRangoEdad(maria().getRangoEdad());
@@ -204,6 +207,7 @@ public class ClienteRepositoryUTest {
 	public void CompareClientes(Cliente clienteOrigen, Cliente clienteDestino) {
 		assertThat(clienteOrigen, is(notNullValue()));
 
+		assertThat(clienteOrigen.getConsultoraId(), is(equalTo(clienteDestino.getConsultoraId())));
 		assertThat(clienteOrigen.getPrimerNombre(), is(equalTo(clienteDestino.getPrimerNombre())));
 		assertThat(clienteOrigen.getSegundoNombre(), is(equalTo(clienteDestino.getSegundoNombre())));
 		assertThat(clienteOrigen.getPrimerApellido(), is(equalTo(clienteDestino.getPrimerApellido())));
@@ -223,6 +227,7 @@ public class ClienteRepositoryUTest {
 		assertThat(clienteOrigen.getCelular(), is(equalTo(clienteDestino.getCelular())));
 		assertThat(clienteOrigen.getTelefonoCasa(), is(equalTo(clienteDestino.getTelefonoCasa())));
 		assertThat(clienteOrigen.getTelefonoOficina(), is(equalTo(clienteDestino.getTelefonoOficina())));
+		assertThat(clienteOrigen.getTelefonoOficinaExtension(), is(equalTo(clienteDestino.getTelefonoOficinaExtension())));
 		assertThat(clienteOrigen.getTelefonoConyuge(), is(equalTo(clienteDestino.getTelefonoConyuge())));
 		assertThat(clienteOrigen.getFotografia(), is(equalTo(clienteDestino.getFotografia())));
 		assertThat(clienteOrigen.getRangoEdad(), is(equalTo(clienteDestino.getRangoEdad())));

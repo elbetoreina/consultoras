@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 import static com.consultoras.app.common.utils.CalendarUtils.*;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -39,6 +40,7 @@ public class ClienteJsonConverter {
 		cliente.setCelular(JsonReader.getStringOrNull(jsonObject, "celular"));
 		cliente.setTelefonoCasa(JsonReader.getStringOrNull(jsonObject, "telefonoCasa"));
 		cliente.setTelefonoOficina(JsonReader.getStringOrNull(jsonObject, "telefonoOficina"));
+		cliente.setTelefonoOficinaExtension(JsonReader.getStringOrNull(jsonObject, "telefonoOficinaExtension"));
 		cliente.setTelefonoConyuge(JsonReader.getStringOrNull(jsonObject, "telefonoConyuge"));
 		cliente.setFotografia(JsonReader.getStringOrNull(jsonObject, "fotografia"));
 		
@@ -58,12 +60,14 @@ public class ClienteJsonConverter {
 				
 		cliente.setFechaClientePreferido(trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaClientePreferido")));
 		cliente.setReferidoPor(JsonReader.getStringOrNull(jsonObject, "referidoPor"));
+		
 
 		return cliente;
 	}
 
 	public JsonElement convertToJsonElement(final Cliente cliente) {
-		final JsonObject jsonObject = new JsonObject();
+		final JsonObject jsonObject = new JsonObject();		
+		
 		
 		jsonObject.addProperty("id", cliente.getId());
 		jsonObject.addProperty("primerNombre", cliente.getPrimerNombre());
@@ -79,6 +83,7 @@ public class ClienteJsonConverter {
 		jsonObject.addProperty("celular", cliente.getCelular());
 		jsonObject.addProperty("telefonoCasa", cliente.getTelefonoCasa());
 		jsonObject.addProperty("telefonoOficina", cliente.getTelefonoOficina());
+		jsonObject.addProperty("telefonoOficinaExtension", cliente.getTelefonoOficinaExtension());
 		jsonObject.addProperty("telefonoConyuge", cliente.getTelefonoConyuge());
 		jsonObject.addProperty("fotografia", cliente.getFotografia());
 		jsonObject.addProperty("rangoEdad", cliente.getRangoEdad().toString());
@@ -90,7 +95,8 @@ public class ClienteJsonConverter {
 		jsonObject.addProperty("colorCabello", cliente.getColorCabello().toString());
 		jsonObject.addProperty("colorOjos", cliente.getColorOjos().toString());
 		jsonObject.addProperty("fechaClientePreferido", epochFromCalendar(cliente.getFechaClientePreferido()));
-		jsonObject.addProperty("referidoPor", cliente.getReferidoPor());
+		jsonObject.addProperty("referidoPor", cliente.getReferidoPor());		
+		
 		
 		return jsonObject;
 	}

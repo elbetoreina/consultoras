@@ -8,6 +8,9 @@
         <dependent-module archiveName="consultoras-model-0.0.1-SNAPSHOT.jar" deploy-path="/" handle="module:/resource/consultoras-model/consultoras-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="consultoras-resource-0.0.1-SNAPSHOT.jar" deploy-path="/lib/" handle="module:/resource/consultoras-resource/consultoras-resource">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="gson-2.3.1.jar" deploy-path="/lib/" handle="module:/classpath/var/M2_REPO/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

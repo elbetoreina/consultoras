@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.telefonoOficinaExtension",
+    "errorDescription":"size must be between 1 and 10"
+}

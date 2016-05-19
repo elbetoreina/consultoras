@@ -33,8 +33,9 @@ public class ClienteRepository {
 		em.merge(cliente);
 	}
 	
+	
 	public void delete(Cliente cliente){
-		em.remove(cliente);		
+		em.remove(em.merge(cliente));		
 	}
 	
 	@SuppressWarnings("unchecked")
