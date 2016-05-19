@@ -1,0 +1,4 @@
+{
+    "errorIdentification":"cliente.invalidField.consultoraId",
+    "errorDescription":"may not be null"
+}

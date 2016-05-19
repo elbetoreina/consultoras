@@ -27,6 +27,7 @@ public class ClienteJsonConverter {
 		final JsonObject jsonObject = JsonReader.readAsJsonObject(json);
 
 		final Cliente cliente = new Cliente();
+		cliente.setConsultoraId(JsonReader.getLongOrNull(jsonObject, "consultoraId"));
 		cliente.setPrimerNombre(JsonReader.getStringOrNull(jsonObject, "primerNombre"));
 		cliente.setSegundoNombre(JsonReader.getStringOrNull(jsonObject, "segundoNombre"));
 		cliente.setPrimerApellido(JsonReader.getStringOrNull(jsonObject, "primerApellido"));
@@ -70,6 +71,7 @@ public class ClienteJsonConverter {
 		
 		
 		jsonObject.addProperty("id", cliente.getId());
+		jsonObject.addProperty("consultoraId", cliente.getConsultoraId());
 		jsonObject.addProperty("primerNombre", cliente.getPrimerNombre());
 		jsonObject.addProperty("segundoNombre", cliente.getSegundoNombre());
 		jsonObject.addProperty("primerApellido", cliente.getPrimerApellido());

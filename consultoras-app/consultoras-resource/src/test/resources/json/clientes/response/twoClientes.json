@@ -30,7 +30,8 @@
 		    "colorCabello":"Castano",
 		    "colorOjos":"Cafe",
 		    "fechaClientePreferido":"1391277600",
-		    "referidoPor":"Alberto Reina"
+		    "referidoPor":"Alberto Reina",
+		    "consultoraId":1
         },
         {
         	"id": 2,
@@ -59,7 +60,8 @@
 		    "colorCabello":"Negro",
 		    "colorOjos":"Verde",
 		    "fechaClientePreferido":"1476900000",
-		    "referidoPor":"Luisa Molina"
+		    "referidoPor":"Luisa Molina",
+		    "consultoraId":1
         }
     ]
 }

@@ -72,6 +72,17 @@ public class ClienteResourceIntTest {
 
 	}
 	
+	
+	@Test
+	@RunAsClient
+	public void addClienteWithNullConsultoraId() {
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE).postWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithNullConsultoraId.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorNullConsultoraId.json");
+	}
+	
 	@Test
 	@RunAsClient
 	public void addClienteWithNullPrimerNombre() {
@@ -578,6 +589,17 @@ public class ClienteResourceIntTest {
 		findClienteAndAssertResponseWithCliente(id, maria());
 	}
 	
+	
+	@Test
+	@RunAsClient
+	public void updateClienteWithNullConsultoraId() {
+		final Long id = addClienteAndGetId("cliente.json");
+		final Response response = resourceClient.resourcePath(PATH_RESOURCE + "/" + id).putWithFile(
+				getPathFileRequest(PATH_RESOURCE, "clienteWithNullConsultoraId.json"));
+
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorNullConsultoraId.json");
+	}
 	
 	@Test
 	@RunAsClient

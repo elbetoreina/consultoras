@@ -64,15 +64,27 @@ public class ClienteResourceUTest {
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteAlreadyExists.json");
 	}
-	
+
 	@Test
 	public void addClienteWithNullConsultoraId() {
 		when(clienteServices.testAddCliente()).thenThrow(new FieldNotValidException("consultoraId", "may not be null"));
 
 		final Response response = clienteResource
-				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullPrimerNombre.json")));
+				.addTest(readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullConsultoraId.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
-		assertJsonResponseWithFile(response, "clienteErrorNullPrimerNombre.json");
+		assertJsonResponseWithFile(response, "clienteErrorNullConsultoraId.json");
+	}
+
+	@Test
+	public void updateClienteWithNullConsultoraId() {
+
+		doThrow(new FieldNotValidException("consultoraId", "may not be null")).when(clienteServices)
+				.testUpdateCliente();
+
+		final Response response = clienteResource.updateTest(1L,
+				readJsonFile(getPathFileRequest(PATH_RESOURCE, "clienteWithNullConsultoraId.json")));
+		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
+		assertJsonResponseWithFile(response, "clienteErrorNullConsultoraId.json");
 	}
 
 	@Test
@@ -475,7 +487,7 @@ public class ClienteResourceUTest {
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteErrorLongTelefonoOficinaExtension.json");
 	}
-	
+
 	@Test
 	public void updateClienteWithShortTelefonoOficinaExtension() {
 		doThrow(new FieldNotValidException("telefonoOficinaExtension", "size must be between 1 and 10"))
@@ -618,12 +630,9 @@ public class ClienteResourceUTest {
 
 	@Test
 	public void updateClientWithDataBelongingToOtherClient() {
+		doThrow(new ClienteExistentException()).when(clienteServices).testUpdateCliente();
 
-		Cliente cliente = lucia();
-
-		doThrow(new ClienteExistentException()).when(clienteServices).update(clienteWithId(cliente, 1L));
-
-		final Response response = clienteResource.update(1L,
+		final Response response = clienteResource.updateTest(1L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.VALIDATION_ERROR.getCode())));
 		assertJsonResponseWithFile(response, "clienteAlreadyExists.json");
@@ -1154,11 +1163,9 @@ public class ClienteResourceUTest {
 	@Test
 	public void updateClienteNotFound() {
 
-		Cliente cliente = lucia();
+		doThrow(new ClienteNotFoundException()).when(clienteServices).testUpdateCliente();
 
-		doThrow(new ClienteNotFoundException()).when(clienteServices).update(clienteWithId(cliente, 2L));
-
-		final Response response = clienteResource.update(2L,
+		final Response response = clienteResource.updateTest(2L,
 				readJsonFile(getPathFileRequest(PATH_RESOURCE, "cliente.json")));
 		assertThat(response.getStatus(), is(equalTo(HttpCode.NOT_FOUND.getCode())));
 		assertJsonResponseWithFile(response, "clienteNotFound.json");
