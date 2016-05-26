@@ -43,6 +43,11 @@ public class JsonReader {
 		}
 		return property.getAsInt();
 	}
+	
+	public static JsonElement getProperty(final JsonObject jsonObject, final String propertyName){
+		final JsonElement property = jsonObject.get(propertyName);
+		return property;
+	}
 
 	public static String getStringOrNull(final JsonObject jsonObject, final String propertyName) {
 		final JsonElement property = jsonObject.get(propertyName);

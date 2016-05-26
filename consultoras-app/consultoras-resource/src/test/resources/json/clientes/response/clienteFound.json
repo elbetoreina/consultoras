@@ -26,5 +26,5 @@
     "colorOjos":"Cafe",
     "fechaClientePreferido":"1391277600",
     "referidoPor":"Alberto Reina",
-    "consultoraId":1
+    "consultora": {"id":1,"primerNombre":"Maria","segundoNombre":"Claudia","primerApellido":"Pineda","segundoApellido":"Osorio","telefono":"5575-2615","email":"marygacelas@yahoo.com","codigoConsultora":"MARY_01","nit":"164578-7"}
 }

@@ -3,6 +3,7 @@ package com.consultoras.app.cliente.resource;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 import static com.consultoras.app.common.utils.CalendarUtils.*;
 
@@ -19,21 +20,41 @@ import com.consultoras.app.cliente.model.TipoPiel;
 import com.consultoras.app.cliente.model.TonoBase;
 import com.consultoras.app.cliente.model.TonoPiel;
 import com.consultoras.app.common.json.JsonReader;
+import com.consultoras.app.consultora.model.Consultora;
+import com.consultoras.app.consultora.resource.ConsultoraJsonConverter;
 
 @ApplicationScoped
 public class ClienteJsonConverter {
 	
+	@Inject
+	ConsultoraJsonConverter consultoraJsonConverter;
+
 	public Cliente convertFrom(final String json) throws IllegalArgumentException {
 		final JsonObject jsonObject = JsonReader.readAsJsonObject(json);
 
 		final Cliente cliente = new Cliente();
-		cliente.setConsultoraId(JsonReader.getLongOrNull(jsonObject, "consultoraId"));
+		Consultora consultora = new Consultora();
+		JsonObject consultoraJsonObject = (JsonObject)(JsonReader.getProperty(jsonObject, "consultora"));	
+		
+		
+		consultora.setId(JsonReader.getLongOrNull(consultoraJsonObject, "id"));
+		consultora.setPrimerNombre(JsonReader.getStringOrNull(jsonObject, "primerNombre"));		
+		consultora.setSegundoNombre(JsonReader.getStringOrNull(jsonObject, "segundoNombre"));
+		consultora.setPrimerApellido(JsonReader.getStringOrNull(jsonObject, "primerApellido"));
+		consultora.setSegundoApellido(JsonReader.getStringOrNull(jsonObject, "segundoApellido"));
+		consultora.setApellidoCasada(JsonReader.getStringOrNull(jsonObject, "apellidoCasada"));
+		consultora.setCodigoConsultora(JsonReader.getStringOrNull(jsonObject, "codigoConsultora"));		
+		consultora.setEmail(JsonReader.getStringOrNull(jsonObject, "email"));
+		consultora.setNit(JsonReader.getStringOrNull(jsonObject, "nit"));
+		consultora.setTelefono(JsonReader.getStringOrNull(jsonObject, "telefono"));	
+		
+		cliente.setConsultora(consultora);
 		cliente.setPrimerNombre(JsonReader.getStringOrNull(jsonObject, "primerNombre"));
 		cliente.setSegundoNombre(JsonReader.getStringOrNull(jsonObject, "segundoNombre"));
 		cliente.setPrimerApellido(JsonReader.getStringOrNull(jsonObject, "primerApellido"));
 		cliente.setSegundoApellido(JsonReader.getStringOrNull(jsonObject, "segundoApellido"));
 		cliente.setApellidoCasada(JsonReader.getStringOrNull(jsonObject, "apellidoCasada"));
-		cliente.setFechaNacimiento(trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaNacimiento")));		
+		cliente.setFechaNacimiento(trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaNacimiento")));
 		cliente.setFechaAniversario(trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaAniversario")));
 		cliente.setHoraLocalizacion(JsonReader.getStringOrNull(jsonObject, "horaLocalizacion"));
 		cliente.setDireccion(JsonReader.getStringOrNull(jsonObject, "direccion"));
@@ -44,8 +65,8 @@ public class ClienteJsonConverter {
 		cliente.setTelefonoOficinaExtension(JsonReader.getStringOrNull(jsonObject, "telefonoOficinaExtension"));
 		cliente.setTelefonoConyuge(JsonReader.getStringOrNull(jsonObject, "telefonoConyuge"));
 		cliente.setFotografia(JsonReader.getStringOrNull(jsonObject, "fotografia"));
-		
-		try{
+
+		try {
 			cliente.setRangoEdad(RangoEdad.valueOf(JsonReader.getStringOrNull(jsonObject, "rangoEdad")));
 			cliente.setTonoBase(TonoBase.valueOf(JsonReader.getStringOrNull(jsonObject, "tonoBase")));
 			cliente.setTipoLabios(TipoLabios.valueOf(JsonReader.getStringOrNull(jsonObject, "tipoLabios")));
@@ -54,24 +75,37 @@ public class ClienteJsonConverter {
 			cliente.setTonoPiel(TonoPiel.valueOf(JsonReader.getStringOrNull(jsonObject, "tonoPiel")));
 			cliente.setColorCabello(ColorCabello.valueOf(JsonReader.getStringOrNull(jsonObject, "colorCabello")));
 			cliente.setColorOjos(ColorOjos.valueOf(JsonReader.getStringOrNull(jsonObject, "colorOjos")));
-		}
-		catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			throw e;
 		}
-				
-		cliente.setFechaClientePreferido(trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaClientePreferido")));
+
+		cliente.setFechaClientePreferido(
+				trimDateFromEpoch(JsonReader.getStringOrNull(jsonObject, "fechaClientePreferido")));
 		cliente.setReferidoPor(JsonReader.getStringOrNull(jsonObject, "referidoPor"));
-		
 
 		return cliente;
 	}
 
 	public JsonElement convertToJsonElement(final Cliente cliente) {
 		final JsonObject jsonObject = new JsonObject();		
+		final JsonObject consultoraJsonElement = new JsonObject();
 		
+		Consultora consultora = new Consultora();		
+		consultora = cliente.getConsultora();		
 		
+		consultoraJsonElement.addProperty("id", consultora.getId());
+		consultoraJsonElement.addProperty("primerNombre", consultora.getPrimerNombre());
+		consultoraJsonElement.addProperty("segundoNombre", consultora.getSegundoNombre());
+		consultoraJsonElement.addProperty("primerApellido", consultora.getPrimerApellido());
+		consultoraJsonElement.addProperty("segundoApellido", consultora.getSegundoApellido());
+		consultoraJsonElement.addProperty("apellidoCasada", consultora.getApellidoCasada());		
+		consultoraJsonElement.addProperty("codigoConsultora", consultora.getCodigoConsultora());
+		consultoraJsonElement.addProperty("email", consultora.getEmail());
+		consultoraJsonElement.addProperty("nit", consultora.getNit());
+		consultoraJsonElement.addProperty("telefono", consultora.getTelefono());
+
 		jsonObject.addProperty("id", cliente.getId());
-		jsonObject.addProperty("consultoraId", cliente.getConsultoraId());
+		jsonObject.add("consultora", consultoraJsonElement);
 		jsonObject.addProperty("primerNombre", cliente.getPrimerNombre());
 		jsonObject.addProperty("segundoNombre", cliente.getSegundoNombre());
 		jsonObject.addProperty("primerApellido", cliente.getPrimerApellido());
@@ -97,9 +131,8 @@ public class ClienteJsonConverter {
 		jsonObject.addProperty("colorCabello", cliente.getColorCabello().toString());
 		jsonObject.addProperty("colorOjos", cliente.getColorOjos().toString());
 		jsonObject.addProperty("fechaClientePreferido", epochFromCalendar(cliente.getFechaClientePreferido()));
-		jsonObject.addProperty("referidoPor", cliente.getReferidoPor());		
-		
-		
+		jsonObject.addProperty("referidoPor", cliente.getReferidoPor());
+
 		return jsonObject;
 	}
 

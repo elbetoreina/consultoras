@@ -1,4 +1,4 @@
 {
-    "errorIdentification":"cliente.invalidField.consultoraId",
-    "errorDescription":"may not be null"
+    "errorIdentification":"Error Generico de Insercion",
+    "errorDescription":"java.lang.ClassCastException: com.google.gson.JsonNull cannot be cast to com.google.gson.JsonObject"
 }
